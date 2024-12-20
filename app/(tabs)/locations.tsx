@@ -2,10 +2,10 @@ import { StyleSheet } from 'react-native';
 
 import { Text, View } from '@/components/Themed';
 
-export default function IndexScreen() {
+export default function LocationsScreen() {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Assets</Text>
+      <Text style={styles.title}>Locations</Text>
       <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
     </View>
   );
