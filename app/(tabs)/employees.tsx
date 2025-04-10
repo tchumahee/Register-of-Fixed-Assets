@@ -1,9 +1,10 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, TouchableOpacity } from 'react-native';
 
 import { Text, View } from '@/components/Themed';
 import { FlatList } from 'react-native';
 import colors from '../styles/colors';
 import globalStyles from '../styles/global';
+
 
 export default function EmployeesScreen() {
   return (
@@ -33,10 +34,11 @@ export default function EmployeesScreen() {
           {key: 'Vivienne'},
 
         ]}
-        renderItem={({item}) => <View style={styles.listItem}><Text style={styles.text}>{item.key}</Text></View>}    
+        renderItem={({item}) => <TouchableOpacity><View style={styles.listItem}><Text style={styles.text}>{item.key}</Text></View></TouchableOpacity>}    
       >
       
       </FlatList>
+      <TouchableOpacity style={globalStyles.floatingButton}><Text>+</Text></TouchableOpacity>
     </View>
   );
 }

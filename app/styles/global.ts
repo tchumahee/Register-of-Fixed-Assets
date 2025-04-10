@@ -16,6 +16,17 @@ const globalStyles = StyleSheet.create({
     textLight: {
         color: colors.textLight,
         fontSize: 16
+    },
+    floatingButton: {
+        position: 'absolute',
+        width: 60,
+        height: 60,
+        alignItems: 'center',
+        justifyContent: 'center',
+        right: 30,
+        bottom: 30,
+        backgroundColor: colors.secondary,
+        borderRadius: 30,
     }
 })
 
