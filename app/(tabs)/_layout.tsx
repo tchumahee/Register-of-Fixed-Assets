@@ -6,6 +6,7 @@ import { Pressable } from 'react-native';
 import Colors from '@/constants/Colors';
 import { useColorScheme } from '@/components/useColorScheme';
 import { useClientOnlyValue } from '@/components/useClientOnlyValue';
+import colors from '../styles/colors';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
@@ -21,16 +22,23 @@ export default function TabLayout() {
   return (
     <Tabs
       screenOptions={{
+        // tabBarStyle: {
+        //   backgroundColor: colors.secondaryDarker
+        // },
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
         // Disable the static render of the header on web
         // to prevent a hydration error in React Navigation v6.
         headerShown: useClientOnlyValue(false, true),
+        headerStyle: {
+          backgroundColor: colors.secondary,
+        }
       }}>
       <Tabs.Screen
         name="index"
         options={{
           title: 'Assets',
           tabBarIcon: ({ color }) => <TabBarIcon name="archive" color={color} />,
+          headerTintColor: 'black'
           // headerRight: () => (
           //   <Link href="/modal" asChild>
           //     <Pressable>
@@ -52,6 +60,7 @@ export default function TabLayout() {
         options={{
           title: 'Employees',
           tabBarIcon: ({ color }) => <TabBarIcon name="users" color={color} />,
+          headerTintColor: 'black'
         }}
       />
       <Tabs.Screen
@@ -59,6 +68,7 @@ export default function TabLayout() {
         options={{
           title: 'Locations',
           tabBarIcon: ({ color }) => <TabBarIcon name="map-marker" color={color} />,
+          headerTintColor: 'black'
         }}
       />
       <Tabs.Screen
@@ -66,6 +76,7 @@ export default function TabLayout() {
         options={{
           title: 'Census',
           tabBarIcon: ({ color }) => <TabBarIcon name="list-alt" color={color} />,
+          headerTintColor: 'black'
         }}
       />
     </Tabs>

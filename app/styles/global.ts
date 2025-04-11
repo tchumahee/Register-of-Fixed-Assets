@@ -25,7 +25,7 @@ const globalStyles = StyleSheet.create({
         justifyContent: 'center',
         right: 30,
         bottom: 30,
-        backgroundColor: colors.secondary,
+        backgroundColor: colors.primary,
         borderRadius: 30,
     }
 })
