@@ -4,9 +4,18 @@ import { Text, View } from '@/components/Themed';
 import { FlatList } from 'react-native';
 import colors from '../styles/colors';
 import globalStyles from '../styles/global';
+import { useState } from 'react';
+import AddNewEntryModal from '../components/add-new-entry-modal';
 
 
 export default function EmployeesScreen() {
+
+  const [modalIsVisible, setModalIsVisible] = useState(false);
+
+  function addNewEntryModal() {
+    setModalIsVisible(true);
+  }
+
   return (
     <View style={globalStyles.viewContainer}>
       <FlatList
@@ -43,9 +52,13 @@ export default function EmployeesScreen() {
       >
       
       </FlatList>
+
+
       <TouchableOpacity
       activeOpacity={0.8} 
+      onPress={addNewEntryModal}
       style={globalStyles.floatingButton}><Text>+</Text></TouchableOpacity>
+      <AddNewEntryModal modalIsVisible={modalIsVisible} setModalIsVisible={setModalIsVisible}></AddNewEntryModal>
     </View>
   );
 }

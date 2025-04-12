@@ -7,6 +7,7 @@ const colors = {
     secondaryLighter: '#7adabf',
     background: 'black',
     containerBackground: '#222222',
+    modalBackground: '#444444',
     textLight: 'white',
     textDark: 'black'
 }

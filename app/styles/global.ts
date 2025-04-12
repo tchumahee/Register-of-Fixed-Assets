@@ -1,6 +1,21 @@
 import { StyleSheet } from "react-native";
 import colors from "./colors";
 
+const baseButton = {
+    borderRadius: 20,
+    margin: 10,
+    padding: 10,
+    width: 125,
+    height: 45,
+    justifyContent: 'center' as const,
+    alignItems: 'center' as const,
+};
+
+const baseHeader = {
+    fontSize: 30,
+    fontWeight: '600' as const,
+};
+
 const globalStyles = StyleSheet.create({
     viewContainer: {
         flex: 1,
@@ -28,6 +43,51 @@ const globalStyles = StyleSheet.create({
         bottom: 30,
         backgroundColor: colors.primary,
         borderRadius: 30,
+    },
+
+    modalWindow: {
+        flex: 1,
+        backgroundColor: 'black'
+    },
+
+    contentContainer: {
+        margin: 30
+    },
+    infoContainer: {
+        marginTop: 30,
+        borderRadius: 20,
+        borderWidth: 2,
+        borderColor: colors.secondaryDarker,
+        minHeight: 90,
+        padding: 15
+    },
+
+    infoTextLight: {
+        color: 'white',
+        fontSize: 20
+    },
+
+    headerLight: {
+        ...baseHeader,
+        color: 'white',
+      },
+      headerDark: {
+        ...baseHeader,
+        color: 'black',
+      },
+
+    buttonPrimary: {
+        ...baseButton,
+        backgroundColor: colors.primary,
+    },
+
+    buttonSecondary: {
+        ...baseButton,
+        backgroundColor: colors.primaryDarker,
+    },
+
+    buttonLine: {
+        flexDirection: 'row'
     }
 })
 
