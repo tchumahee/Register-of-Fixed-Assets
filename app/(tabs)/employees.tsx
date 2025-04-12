@@ -4,8 +4,9 @@ import { Text, View } from '@/components/Themed';
 import { FlatList } from 'react-native';
 import colors from '../styles/colors';
 import globalStyles from '../styles/global';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AddNewEntryModal from '../components/add-new-entry-modal';
+import { getAllEmployees, Employee } from '../database/employeeService';
 
 
 export default function EmployeesScreen() {
@@ -16,39 +17,32 @@ export default function EmployeesScreen() {
     setModalIsVisible(true);
   }
 
+  const [employees, setEmployees] = useState<Employee[]>([]);
+
+  const fetchEmployees = async () => {
+    const data = await getAllEmployees();
+    setEmployees(data);
+  };
+
+  function newEmployeeAdded() {
+    console.log("Callback run");
+    fetchEmployees();
+  }
+
+  useEffect(() => {
+    fetchEmployees();
+  }, []);
+
   return (
     <View style={globalStyles.viewContainer}>
       <FlatList
-        data={[
-          {key: 'Devin'},
-          {key: 'Dan'},
-          {key: 'Dominic'},
-          {key: 'Jackson'},
-          {key: 'James'},
-          {key: 'Joel'},
-          {key: 'Mary'},
-          {key: 'Kevin'},
-          {key: 'Jimmy'},
-          {key: 'Julie'},
-          {key: 'Jillian'},
-          {key: 'Chris'},
-          {key: 'Sean'},
-          {key: 'Shaun'},
-          {key: 'Timothy'},
-          {key: 'Timothee'},
-          {key: 'Ivan'},
-          {key: 'Stephen'},
-          {key: 'Mark'},
-          {key: 'Devon'},
-          {key: 'Vivienne'},
-
-        ]}
+        data={employees}
         renderItem={({item}) => 
         <TouchableOpacity
         activeOpacity={0.8}
         style={styles.listItem}
         >
-          <Text style={styles.text}>{item.key}</Text></TouchableOpacity>}    
+          <Text style={styles.text}>{item.name + " " + item.lastname}</Text></TouchableOpacity>}    
       >
       
       </FlatList>
@@ -58,7 +52,11 @@ export default function EmployeesScreen() {
       activeOpacity={0.8} 
       onPress={addNewEntryModal}
       style={globalStyles.floatingButton}><Text>+</Text></TouchableOpacity>
-      <AddNewEntryModal modalIsVisible={modalIsVisible} setModalIsVisible={setModalIsVisible}></AddNewEntryModal>
+      <AddNewEntryModal 
+      modalIsVisible={modalIsVisible} 
+      setModalIsVisible={setModalIsVisible}
+      newEntryAdded={newEmployeeAdded}
+      ></AddNewEntryModal>
     </View>
   );
 }

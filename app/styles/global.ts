@@ -56,10 +56,11 @@ const globalStyles = StyleSheet.create({
     infoContainer: {
         marginTop: 30,
         borderRadius: 20,
-        borderWidth: 2,
-        borderColor: colors.secondaryDarker,
+        // borderWidth: 2,
+        // borderColor: colors.secondaryDarker,
         minHeight: 90,
-        padding: 15
+        padding: 15,
+        backgroundColor: colors.containerBackground
     },
 
     infoTextLight: {
@@ -88,6 +89,17 @@ const globalStyles = StyleSheet.create({
 
     buttonLine: {
         flexDirection: 'row'
+    },
+
+    textInput: {
+        backgroundColor: 'black',
+        margin: 5,
+        padding: 4,
+        borderRadius: 8,
+        borderWidth: 1,
+        borderColor: colors.secondary,
+        color: 'white',
+        fontSize: 20
     }
 })
 

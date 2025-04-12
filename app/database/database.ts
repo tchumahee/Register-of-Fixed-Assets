@@ -3,6 +3,10 @@ import * as SQLite from 'expo-sqlite';
 // Open the database asynchronously
 const db = SQLite.openDatabaseAsync('app.db');
 
+export const getDatabase = async () => {
+  return await db;
+};
+
 // Function to initialize the database
 export const initDatabase = async () => {
   try {
