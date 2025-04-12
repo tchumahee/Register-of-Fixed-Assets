@@ -19,6 +19,10 @@ function TabBarIcon(props: {
 export default function TabLayout() {
   const colorScheme = useColorScheme();
 
+  const headerTitleTint = 'white';
+  const tabBarActiveTintColor = colors.primaryLighter;
+  const tabBarInactiveTintColor = colors.primaryDarker;
+
   return (
     <Tabs
       screenOptions={{
@@ -29,16 +33,18 @@ export default function TabLayout() {
         // Disable the static render of the header on web
         // to prevent a hydration error in React Navigation v6.
         headerShown: useClientOnlyValue(false, true),
-        headerStyle: {
-          backgroundColor: colors.secondary,
-        }
+        // headerStyle: {
+        //   backgroundColor: colors.secondaryDarker,
+        // }
       }}>
       <Tabs.Screen
         name="index"
         options={{
           title: 'Assets',
           tabBarIcon: ({ color }) => <TabBarIcon name="archive" color={color} />,
-          headerTintColor: 'black'
+          headerTintColor: headerTitleTint,
+          tabBarActiveTintColor: tabBarActiveTintColor,
+          tabBarInactiveTintColor: tabBarInactiveTintColor
           // headerRight: () => (
           //   <Link href="/modal" asChild>
           //     <Pressable>
@@ -60,7 +66,9 @@ export default function TabLayout() {
         options={{
           title: 'Employees',
           tabBarIcon: ({ color }) => <TabBarIcon name="users" color={color} />,
-          headerTintColor: 'black'
+          headerTintColor: headerTitleTint,
+          tabBarActiveTintColor: tabBarActiveTintColor,
+          tabBarInactiveTintColor: tabBarInactiveTintColor
         }}
       />
       <Tabs.Screen
@@ -68,7 +76,9 @@ export default function TabLayout() {
         options={{
           title: 'Locations',
           tabBarIcon: ({ color }) => <TabBarIcon name="map-marker" color={color} />,
-          headerTintColor: 'black'
+          headerTintColor: headerTitleTint,
+          tabBarActiveTintColor: tabBarActiveTintColor,
+          tabBarInactiveTintColor: tabBarInactiveTintColor
         }}
       />
       <Tabs.Screen
@@ -76,7 +86,9 @@ export default function TabLayout() {
         options={{
           title: 'Census',
           tabBarIcon: ({ color }) => <TabBarIcon name="list-alt" color={color} />,
-          headerTintColor: 'black'
+          headerTintColor: headerTitleTint,
+          tabBarActiveTintColor: tabBarActiveTintColor,
+          tabBarInactiveTintColor: tabBarInactiveTintColor
         }}
       />
     </Tabs>

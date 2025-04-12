@@ -6,6 +6,7 @@ const colors = {
     primaryLighter: '#da7a96',
     secondaryLighter: '#7adabf',
     background: 'black',
+    containerBackground: '#222222',
     textLight: 'white',
     textDark: 'black'
 }

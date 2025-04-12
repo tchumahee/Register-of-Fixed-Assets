@@ -57,16 +57,18 @@ const styles = StyleSheet.create({
     fontSize: 20
   },
   listItem: {
+    margin: 3,
     padding: 10,
     height: 50,
     borderBottomWidth: 1,
-    borderBottomColor: colors.secondaryDarker,
+    backgroundColor: colors.containerBackground,
+    borderRadius: 7,
     justifyContent: 'center',
     alignItems: 'center',
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
-  },
+  // separator: {
+  //   marginVertical: 30,
+  //   height: 1,
+  //   width: '80%',
+  // },
 });
