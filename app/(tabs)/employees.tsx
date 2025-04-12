@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableHighlight, TouchableOpacity } from 'react-native';
 
 import { Text, View } from '@/components/Themed';
 import { FlatList } from 'react-native';
@@ -34,11 +34,18 @@ export default function EmployeesScreen() {
           {key: 'Vivienne'},
 
         ]}
-        renderItem={({item}) => <TouchableOpacity><View style={styles.listItem}><Text style={styles.text}>{item.key}</Text></View></TouchableOpacity>}    
+        renderItem={({item}) => 
+        <TouchableOpacity
+        activeOpacity={0.8}
+        style={styles.listItem}
+        >
+          <Text style={styles.text}>{item.key}</Text></TouchableOpacity>}    
       >
       
       </FlatList>
-      <TouchableOpacity style={globalStyles.floatingButton}><Text>+</Text></TouchableOpacity>
+      <TouchableOpacity
+      activeOpacity={0.8} 
+      style={globalStyles.floatingButton}><Text>+</Text></TouchableOpacity>
     </View>
   );
 }
@@ -60,6 +67,7 @@ const styles = StyleSheet.create({
     margin: 3,
     padding: 10,
     height: 50,
+    flex: 1,
     borderBottomWidth: 1,
     backgroundColor: colors.containerBackground,
     borderRadius: 7,
