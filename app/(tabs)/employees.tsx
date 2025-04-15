@@ -30,7 +30,7 @@ export default function EmployeesScreen() {
   }
 
   const handlePress = (employee: Employee) => {
-    router.setParams({'id' : employee.id.toString()});
+    router.setParams({'id' : employee.id!.toString()});
     router.push({ pathname: `/(screens)/employee/[employee]`, params: { employee: JSON.stringify(employee) } });
   };
 
@@ -42,7 +42,7 @@ export default function EmployeesScreen() {
     <View style={globalStyles.viewContainer}>
       <FlatList
         data={employees}
-        keyExtractor={(item) => item.id.toString()}
+        keyExtractor={(item) => item.id!.toString()}
         renderItem={({item}) => 
         <TouchableOpacity
         onPress={() => handlePress(item)}
