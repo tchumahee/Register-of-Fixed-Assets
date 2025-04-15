@@ -11,7 +11,6 @@ export default function User() {
     return (
         <View style={globalStyles.modalWindow}>
         <View style={globalStyles.contentContainer}>
-          <Text style={globalStyles.headerLight}>Employee details</Text>
           <View style={globalStyles.infoContainer}>
 
             <Text style={globalStyles.textLight}>{employeeObj.id}</Text>
