@@ -2,15 +2,16 @@ import { StyleSheet, TouchableHighlight, TouchableOpacity } from 'react-native';
 
 import { Text, View } from '@/components/Themed';
 import { FlatList } from 'react-native';
-import colors from '../styles/colors';
-import globalStyles from '../styles/global';
+import colors from '@/app/styles/colors';
+import globalStyles from '@/app/styles/global';
 import { useEffect, useState } from 'react';
-import AddNewEntryModal from '../components/add-new-entry-modal';
-import { getAllEmployees, Employee } from '../database/employeeService';
+import AddNewEntryModal from '@/app/components/add-new-entry-modal';
+import { getAllEmployees, Employee } from '@/app/database/employeeService';
+import { useRouter } from 'expo-router';
 
 
 export default function EmployeesScreen() {
-
+  const router = useRouter();
   const [modalIsVisible, setModalIsVisible] = useState(false);
 
   function addNewEntryModal() {
@@ -25,9 +26,13 @@ export default function EmployeesScreen() {
   };
 
   function newEmployeeAdded() {
-    console.log("Callback run");
     fetchEmployees();
   }
+
+  const handlePress = (employee: Employee) => {
+    router.setParams({'id' : employee.id.toString()});
+    router.push({ pathname: `/(screens)/employee/[employee]`, params: { employee: JSON.stringify(employee) } });
+  };
 
   useEffect(() => {
     fetchEmployees();
@@ -37,8 +42,10 @@ export default function EmployeesScreen() {
     <View style={globalStyles.viewContainer}>
       <FlatList
         data={employees}
+        keyExtractor={(item) => item.id.toString()}
         renderItem={({item}) => 
         <TouchableOpacity
+        onPress={() => handlePress(item)}
         activeOpacity={0.8}
         style={styles.listItem}
         >

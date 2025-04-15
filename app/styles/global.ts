@@ -2,10 +2,10 @@ import { StyleSheet } from "react-native";
 import colors from "./colors";
 
 const baseButton = {
-    borderRadius: 20,
+    borderRadius: 10,
     margin: 10,
     padding: 10,
-    width: 125,
+    minWidth: 125,
     height: 45,
     justifyContent: 'center' as const,
     alignItems: 'center' as const,
@@ -33,6 +33,11 @@ const globalStyles = StyleSheet.create({
         color: colors.textLight,
         fontSize: 16
     },
+    textLabel: {
+        fontSize: 16,
+        color: colors.secondary
+    },
+
     floatingButton: {
         position: 'absolute',
         width: 60,
@@ -87,8 +92,13 @@ const globalStyles = StyleSheet.create({
         backgroundColor: colors.primaryDarker,
     },
 
-    buttonLine: {
-        flexDirection: 'row'
+    // buttonLine: {
+    //     flexDirection: 'row'
+    // },
+
+    buttonViewV: {
+        flexDirection: 'column',
+        marginTop: 20
     },
 
     textInput: {

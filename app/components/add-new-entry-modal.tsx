@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import {View, Modal, Text, TouchableOpacity, TextInput } from 'react-native';
 import globalStyles from '../styles/global';
 import { addEmployee } from '../database/employeeService';
@@ -13,13 +13,27 @@ type ModalComponentProps = {
 
 export default function AddNewEntryModal({modalIsVisible, setModalIsVisible, newEntryAdded} : ModalComponentProps) {
 
+  const [name, setName] = useState('');
+  const [lastname, setLastname] = useState('');
+  const [email, setEmail] = useState('');
+
+
+
+  function resetFields() {
+    setName('');
+    setLastname('');
+    setEmail('');
+  }
+
   function modalCanceled() {
+    resetFields();
     setModalIsVisible(false);
   }
 
   function addNewEntry() {
-    addEmployee("Name", "Surname", "Email");
+    addEmployee(name, lastname, email);
     newEntryAdded();
+    resetFields();
     setModalIsVisible(false);
   }
 
@@ -33,26 +47,41 @@ export default function AddNewEntryModal({modalIsVisible, setModalIsVisible, new
 
 
 
-            <Text style={globalStyles.textLight}>aaa</Text>
+            
             <View>
-              <TextInput style={globalStyles.textInput}></TextInput>
-              <TextInput style={globalStyles.textInput}></TextInput>
-              <TextInput style={globalStyles.textInput}></TextInput>
+              <Text style={globalStyles.textLabel}>First name:</Text>
+              <TextInput 
+              placeholder="First Name"
+              value={name}
+              onChangeText={setName}
+              style={globalStyles.textInput}></TextInput>
+              <Text style={globalStyles.textLabel}>Last name:</Text>
+              <TextInput 
+              placeholder="Last Name"
+              value={lastname}
+              onChangeText={setLastname}
+              style={globalStyles.textInput}></TextInput>
+              <Text style={globalStyles.textLabel}>Email:</Text>
+              <TextInput 
+              placeholder="Email"
+              value={email}
+              onChangeText={setEmail}
+              style={globalStyles.textInput}></TextInput>
             </View>
-            <View style={globalStyles.buttonLine}>
+            <View style={globalStyles.buttonViewV}>
+              <TouchableOpacity
+                onPress={addNewEntry}
+                style={globalStyles.buttonPrimary}
+                activeOpacity={0.8}>
+                  <Text style={globalStyles.textDark}>Add</Text>
+              </TouchableOpacity> 
+
               <TouchableOpacity
               onPress={modalCanceled}
               style={globalStyles.buttonSecondary}
               activeOpacity={0.8}>
                 <Text style={globalStyles.textLight}>Cancel</Text>
               </TouchableOpacity>
-
-              <TouchableOpacity
-              onPress={addNewEntry}
-              style={globalStyles.buttonPrimary}
-              activeOpacity={0.8}>
-                <Text style={globalStyles.textDark}>Add</Text>
-              </TouchableOpacity> 
             </View>
             
 
