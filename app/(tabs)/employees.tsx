@@ -8,7 +8,15 @@ import { useEffect, useState } from 'react';
 import AddNewEntryModal from '@/app/components/add-new-entry-modal';
 import { getAllEmployees, Employee } from '@/app/database/employeeService';
 import { useRouter } from 'expo-router';
+import { FontAwesome } from '@expo/vector-icons';
 
+
+function FloatingButtonIcon(props: {
+  name: React.ComponentProps<typeof FontAwesome>['name'];
+  color: string;
+}) {
+  return <FontAwesome size={15} style={{ marginBottom: -3 }} {...props} />;
+}
 
 export default function EmployeesScreen() {
   const router = useRouter();
@@ -58,7 +66,10 @@ export default function EmployeesScreen() {
       <TouchableOpacity
       activeOpacity={0.8} 
       onPress={addNewEntryModal}
-      style={globalStyles.floatingButton}><Text>+</Text></TouchableOpacity>
+      style={globalStyles.floatingButton}>
+        <FloatingButtonIcon name="plus" color={'black'} />
+      </TouchableOpacity>
+      
       <AddNewEntryModal 
       modalIsVisible={modalIsVisible} 
       setModalIsVisible={setModalIsVisible}

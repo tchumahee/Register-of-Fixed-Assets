@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import colors from "./colors";
+import { CurrentRenderContext } from "@react-navigation/native";
 
 const baseButton = {
     borderRadius: 10,
@@ -46,7 +47,7 @@ const globalStyles = StyleSheet.create({
         justifyContent: 'center',
         right: 30,
         bottom: 30,
-        backgroundColor: colors.primary,
+        backgroundColor: colors.secondary,
         borderRadius: 30,
     },
 
@@ -56,9 +57,11 @@ const globalStyles = StyleSheet.create({
     },
 
     contentContainer: {
+        flex:1,
         margin: 30
     },
     infoContainer: {
+        flexDirection: 'column',
         marginTop: 30,
         borderRadius: 20,
         // borderWidth: 2,
@@ -84,21 +87,38 @@ const globalStyles = StyleSheet.create({
 
     buttonPrimary: {
         ...baseButton,
-        backgroundColor: colors.primary,
+        backgroundColor: colors.secondary,
     },
 
     buttonSecondary: {
         ...baseButton,
-        backgroundColor: colors.primaryDarker,
+        backgroundColor: colors.secondaryDarker,
     },
 
-    // buttonLine: {
-    //     flexDirection: 'row'
-    // },
+    buttonViewH: {
+        flexDirection: 'row'
+    },
 
     buttonViewV: {
         flexDirection: 'column',
         marginTop: 20
+    },
+
+    buttonViewHR: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end'
+    },
+
+    optionsButton: {
+      backgroundColor: colors.containerBackground,
+      borderWidth: 0.2,
+      borderColor: 'white',
+      borderRadius: 10,
+      height: 40,
+      width: 40,  
+      justifyContent: 'center',
+      alignItems: 'center',
+      margin: 5
     },
 
     textInput: {
@@ -110,7 +130,7 @@ const globalStyles = StyleSheet.create({
         borderColor: colors.secondary,
         color: 'white',
         fontSize: 20
-    }
+    },
 })
 
 export default globalStyles;
