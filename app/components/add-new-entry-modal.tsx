@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import {View, Modal, Text, TouchableOpacity, TextInput } from 'react-native';
 import globalStyles from '../styles/global';
 import { addEmployee } from '../database/employeeService';
-import AddNewEmployee from './add-new-employee';
+import AddNewEmployee from './employee/add-new-employee';
 
 
 type ModalComponentProps = {

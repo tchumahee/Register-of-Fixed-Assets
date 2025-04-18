@@ -6,8 +6,8 @@ import { FontAwesome } from "@expo/vector-icons";
 import { updateEmployeeById, deleteEmployeeById } from "@/app/database/employeeService";
 import colors from "@/app/styles/colors";
 import { useState } from "react";
-import AddNewEmployee from "@/app/components/add-new-employee";
-import EmployeeView from "@/app/components/employee-view";
+import AddNewEmployee from "@/app/components/employee/add-new-employee";
+import EmployeeView from "@/app/components/employee/employee-view";
 
 
 

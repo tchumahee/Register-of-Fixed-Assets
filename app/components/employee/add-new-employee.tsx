@@ -1,8 +1,8 @@
 
 import React, { useState } from 'react';
 import {View, Modal, Text, TouchableOpacity, TextInput } from 'react-native';
-import globalStyles from '../styles/global';
-import { addEmployee, Employee, updateEmployeeById } from '../database/employeeService';
+import globalStyles from '../../styles/global';
+import { addEmployee, Employee, updateEmployeeById } from '../../database/employeeService';
 
 
 type AddNewEmployeeProps = {
