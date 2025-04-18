@@ -2,22 +2,44 @@
 import React, { useState } from 'react';
 import {View, Modal, Text, TouchableOpacity, TextInput } from 'react-native';
 import globalStyles from '../styles/global';
-import { addEmployee } from '../database/employeeService';
+import { addEmployee, Employee, updateEmployeeById } from '../database/employeeService';
 
 
 type AddNewEmployeeProps = {
   modalCanceled: () => void;
   addNewEntry: () => void;
+  updateExisting: boolean;
+  employee: Employee;
+  setEmployee: React.Dispatch<any>;
 };
 
-export default function AddNewEmployee({modalCanceled, addNewEntry} : AddNewEmployeeProps) {
 
-  const [name, setName] = useState('');
-  const [lastname, setLastname] = useState('');
-  const [email, setEmail] = useState('');
+// represents the form for editing / adding new employees. Directly calls the employeeService
+export default function AddNewEmployee({modalCanceled, addNewEntry, 
+  updateExisting = false, 
+  employee = { id: 0, name: '', lastname: '', email: '' },
+  setEmployee = () => {} } : AddNewEmployeeProps) {
 
-  function addNewEmployee() {
-    addEmployee(name, lastname, email);
+  const [name, setName] = useState(employee.name);
+  const [lastname, setLastname] = useState(employee.lastname);
+  const [email, setEmail] = useState(employee.email);
+
+  async function addNewEmployee() {
+    if (updateExisting) {
+      const updated = {
+        ...employee,
+        name,
+        lastname,
+        email,
+      };
+      const result = await updateEmployeeById(updated);
+      if (result) {
+        setEmployee(result);
+      }
+    } else {
+      await addEmployee(name, lastname, email);
+    }
+  
     resetFields();
     addNewEntry();
   }
@@ -61,7 +83,7 @@ export default function AddNewEmployee({modalCanceled, addNewEntry} : AddNewEmpl
                 onPress={addNewEmployee}
                 style={globalStyles.buttonPrimary}
                 activeOpacity={0.8}>
-                  <Text style={globalStyles.textDark}>Add</Text>
+                  <Text style={globalStyles.textDark}>{updateExisting ? "Save" : "Add"}</Text>
               </TouchableOpacity> 
 
               <TouchableOpacity

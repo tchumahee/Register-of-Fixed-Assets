@@ -4,10 +4,10 @@ import { Text, View } from '@/components/Themed';
 import { FlatList } from 'react-native';
 import colors from '@/app/styles/colors';
 import globalStyles from '@/app/styles/global';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import AddNewEntryModal from '@/app/components/add-new-entry-modal';
 import { getAllEmployees, Employee } from '@/app/database/employeeService';
-import { useRouter } from 'expo-router';
+import { useFocusEffect, useRouter } from 'expo-router';
 import { FontAwesome } from '@expo/vector-icons';
 
 
@@ -42,9 +42,16 @@ export default function EmployeesScreen() {
     router.push({ pathname: `/(screens)/employee/[employee]`, params: { employee: JSON.stringify(employee) } });
   };
 
-  useEffect(() => {
-    fetchEmployees();
-  }, []);
+  // useEffect(() => {
+  //   fetchEmployees();
+  // }, []);
+
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchEmployees(); // Refresh every time the tab is focused
+    }, [])
+  );
 
   return (
     <View style={globalStyles.viewContainer}>
