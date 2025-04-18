@@ -18,6 +18,19 @@ const baseHeader = {
 };
 
 const globalStyles = StyleSheet.create({
+
+    listItem: {
+        margin: 3,
+        padding: 10,
+        height: 50,
+        flex: 1,
+        borderBottomWidth: 1,
+        backgroundColor: colors.containerBackground,
+        borderRadius: 7,
+        justifyContent: 'center',
+        alignItems: 'center',
+      },
+
     viewContainer: {
         flex: 1,
         padding: 2,

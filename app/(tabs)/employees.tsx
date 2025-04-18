@@ -38,7 +38,6 @@ export default function EmployeesScreen() {
   }
 
   const handlePress = (employee: Employee) => {
-    router.setParams({'id' : employee.id!.toString()});
     router.push({ pathname: `/(screens)/employee/[employee]`, params: { employee: JSON.stringify(employee) } });
   };
 
@@ -62,9 +61,9 @@ export default function EmployeesScreen() {
         <TouchableOpacity
         onPress={() => handlePress(item)}
         activeOpacity={0.8}
-        style={styles.listItem}
+        style={globalStyles.listItem}
         >
-          <Text style={styles.text}>{item.name + " " + item.lastname}</Text></TouchableOpacity>}    
+          <Text style={globalStyles.textLight}>{item.name + " " + item.lastname}</Text></TouchableOpacity>}    
       >
       
       </FlatList>
@@ -87,29 +86,19 @@ export default function EmployeesScreen() {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
-  },
-  text: {
-    fontSize: 20
-  },
-  listItem: {
-    margin: 3,
-    padding: 10,
-    height: 50,
-    flex: 1,
-    borderBottomWidth: 1,
-    backgroundColor: colors.containerBackground,
-    borderRadius: 7,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
+  // container: {
+  //   flex: 1,
+  //   alignItems: 'center',
+  //   justifyContent: 'center',
+  // },
+  // title: {
+  //   fontSize: 20,
+  //   fontWeight: 'bold',
+  // },
+  // text: {
+  //   fontSize: 20
+  // },
+  
   // separator: {
   //   marginVertical: 30,
   //   height: 1,

@@ -1,4 +1,4 @@
-// services/employeeService.ts
+
 import { getDatabase } from './database';
 
 

@@ -69,6 +69,11 @@ function RootLayoutNav() {
           title: "Employee details"
         }
         }/>
+        <Stack.Screen name="(screens)/location/[location]"  
+        options={{
+          title: "Assets at location"
+        }
+        }/>
       </Stack>
     </ThemeProvider>
   );
