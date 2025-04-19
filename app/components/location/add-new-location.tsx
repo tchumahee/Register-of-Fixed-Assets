@@ -7,15 +7,6 @@ import MapView, { Callout, Marker, PoiClickEvent, PROVIDER_GOOGLE } from 'react-
 import colors from '@/app/styles/colors';
 import { useFocusEffect, useRouter } from 'expo-router';
 
-
-type AddNewLocationProps = {
-  modalCanceled: () => void;
-  addNewEntry: () => void;
-  updateExisting: boolean;
-  location: Location;
-  setLocation: React.Dispatch<any>;
-};
-
 const INITIAL_REGION = {
   latitude: 43.9159,
   longitude: 17.6791,

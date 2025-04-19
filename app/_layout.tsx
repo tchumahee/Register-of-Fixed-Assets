@@ -79,6 +79,11 @@ function RootLayoutNav() {
           title: "Add new location"
         }
         }/>
+        <Stack.Screen name="(screens)/employee/add-new-employee"  
+        options={{
+          title: "Add new employee"
+        }
+        }/>
       </Stack>
     </ThemeProvider>
   );

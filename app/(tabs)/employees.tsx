@@ -23,7 +23,8 @@ export default function EmployeesScreen() {
   const [modalIsVisible, setModalIsVisible] = useState(false);
 
   function addNewEntryModal() {
-    setModalIsVisible(true);
+    //setModalIsVisible(true);
+    router.push('/(screens)/employee/add-new-employee?mode=add');
   }
 
   const [employees, setEmployees] = useState<Employee[]>([]);
