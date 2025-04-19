@@ -72,7 +72,7 @@ export default function EmployeesScreen() {
       <TouchableOpacity
       activeOpacity={0.8} 
       onPress={addNewEntryModal}
-      style={globalStyles.floatingButton}>
+      style={globalStyles.floatingButtonRight}>
         <FloatingButtonIcon name="plus" color={'black'} />
       </TouchableOpacity>
       

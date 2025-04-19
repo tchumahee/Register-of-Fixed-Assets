@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, ViewStyle } from "react-native";
 import colors from "./colors";
 import { CurrentRenderContext } from "@react-navigation/native";
 
@@ -15,6 +15,16 @@ const baseButton = {
 const baseHeader = {
     fontSize: 30,
     fontWeight: '600' as const,
+};
+
+const baseFloatingButton = {
+    position: 'absolute',
+    width: 60,
+    height: 60,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: colors.secondary,
+    borderRadius: 30,
 };
 
 const globalStyles = StyleSheet.create({
@@ -52,17 +62,18 @@ const globalStyles = StyleSheet.create({
         color: colors.secondary
     },
 
-    floatingButton: {
-        position: 'absolute',
-        width: 60,
-        height: 60,
-        alignItems: 'center',
-        justifyContent: 'center',
+    floatingButtonRight: {
+        ...baseFloatingButton,
         right: 30,
         bottom: 30,
-        backgroundColor: colors.secondary,
-        borderRadius: 30,
-    },
+    } as ViewStyle,
+
+    floatingButtonLeft: {
+        ...baseFloatingButton,
+        left: 30,
+        bottom: 30,
+        backgroundColor: colors.primaryDarker
+    } as ViewStyle,
 
     modalWindow: {
         flex: 1,
@@ -92,11 +103,11 @@ const globalStyles = StyleSheet.create({
     headerLight: {
         ...baseHeader,
         color: 'white',
-      },
-      headerDark: {
-        ...baseHeader,
-        color: 'black',
-      },
+    },
+    headerDark: {
+    ...baseHeader,
+    color: 'black',
+    },
 
     buttonPrimary: {
         ...baseButton,
