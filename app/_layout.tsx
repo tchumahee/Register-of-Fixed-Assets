@@ -79,11 +79,17 @@ function RootLayoutNav() {
           title: "Add new location"
         }
         }/>
-        <Stack.Screen name="(screens)/employee/add-new-employee"  
-        options={{
-          title: "Add new employee"
-        }
-        }/>
+        <Stack.Screen
+        name="(screens)/employee/add-new-employee"
+        options={({ route }) => {
+          const params = route.params as { mode?: string };
+          const mode = params?.mode;
+          return {
+            title: mode === 'edit' ? 'Edit employee' : 'Add new employee',
+          };
+        }}
+      />
+
       </Stack>
     </ThemeProvider>
   );

@@ -49,8 +49,9 @@ export default function AddEmployeeScreen() {
   };
 
   return (
-    <View style={globalStyles.viewContainer}>
-      <Text style={globalStyles.headerLight}>{isUpdate ? 'Edit Employee' : 'Add New Employee'}</Text>
+    <View style={globalStyles.modalWindow}>
+      <View style={globalStyles.contentContainer}>
+      <View style={globalStyles.infoContainer}>
       
       <Text style={globalStyles.textLabel}>First name:</Text>
       <TextInput
@@ -93,6 +94,10 @@ export default function AddEmployeeScreen() {
           <Text style={globalStyles.textLight}>Cancel</Text>
         </TouchableOpacity>
       </View>
+      </View>
+      
     </View>
+    </View>
+    
   );
 }

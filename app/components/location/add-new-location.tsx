@@ -43,14 +43,11 @@ export default function AddNewLocation()
     setSelectedLat(latitude);
     setSelectedLng(longitude);
     setSelectedName(name);
-
-    console.log({ latitude, longitude, name });
   }
 
   const fetchLocations = async () => {
     const data = await getAllLocations();
     setLocations(data);
-    console.log("Locations set: ", data);
   
     const fullMarkers = data.map(loc => ({
       ...loc,
@@ -58,7 +55,6 @@ export default function AddNewLocation()
       longitudeDelta: 0.01
     }));
     setMarkers(fullMarkers);
-    console.log("Markers set: ", fullMarkers);
   };
   
 

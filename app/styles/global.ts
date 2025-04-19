@@ -92,7 +92,7 @@ const globalStyles = StyleSheet.create({
         // borderColor: colors.secondaryDarker,
         minHeight: 90,
         padding: 15,
-        backgroundColor: colors.containerBackground
+        backgroundColor: colors.containerBackground,
     },
 
     infoTextLight: {

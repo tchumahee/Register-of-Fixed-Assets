@@ -5,7 +5,6 @@ import { FlatList } from 'react-native';
 import colors from '@/app/styles/colors';
 import globalStyles from '@/app/styles/global';
 import { useCallback, useEffect, useState } from 'react';
-import AddNewEntryModal from '@/app/components/add-new-entry-modal';
 import { getAllEmployees, Employee } from '@/app/database/employeeService';
 import { useFocusEffect, useRouter } from 'expo-router';
 import { FontAwesome } from '@expo/vector-icons';
@@ -20,7 +19,6 @@ function FloatingButtonIcon(props: {
 
 export default function EmployeesScreen() {
   const router = useRouter();
-  const [modalIsVisible, setModalIsVisible] = useState(false);
 
   function addNewEntryModal() {
     //setModalIsVisible(true);
@@ -41,11 +39,6 @@ export default function EmployeesScreen() {
   const handlePress = (employee: Employee) => {
     router.push({ pathname: `/(screens)/employee/[employee]`, params: { employee: JSON.stringify(employee) } });
   };
-
-  // useEffect(() => {
-  //   fetchEmployees();
-  // }, []);
-
 
   useFocusEffect(
     useCallback(() => {
@@ -76,13 +69,6 @@ export default function EmployeesScreen() {
       style={globalStyles.floatingButtonRight}>
         <FloatingButtonIcon name="plus" color={'black'} />
       </TouchableOpacity>
-      
-      <AddNewEntryModal 
-      modalType='employee'
-      modalIsVisible={modalIsVisible} 
-      setModalIsVisible={setModalIsVisible}
-      newEntryAdded={newEmployeeAdded}
-      ></AddNewEntryModal>
     </View>
   );
 }

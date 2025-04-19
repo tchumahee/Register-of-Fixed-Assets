@@ -3,7 +3,6 @@ import { FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 import { Text, View } from '@/components/Themed';
 import MapView, { Marker, PoiClickEvent, PROVIDER_GOOGLE } from 'react-native-maps';
 import { FontAwesome } from '@expo/vector-icons';
-import AddNewEntryModal from '../components/add-new-entry-modal';
 import { useFocusEffect, useRouter } from 'expo-router';
 import { useCallback, useEffect, useState } from 'react';
 import { getAllLocations, Location } from '../database/locationService';
@@ -18,23 +17,6 @@ const INITIAL_REGION = {
   latitudeDelta: 3.0,
   longitudeDelta: 5.0,
 }
-
-// const placeholderLocations = [
-//   {
-//     id: 1,
-//     latitude: 43.8563,
-//     longitude: 18.4131,
-//     name: "Sarajevo"
-//   },
-//   {
-//     id: 2,
-//     latitude: 44.7722,
-//     longitude: 17.1910,
-//     name: "Banja Luka"
-//   }
-// ]
-
-
   
 function FloatingButtonIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>['name'];
@@ -73,7 +55,6 @@ export default function LocationsScreen() {
   const fetchLocations = async () => {
     const data = await getAllLocations();
     setLocations(data);
-    console.log("Locations set: ", data);
   
     const fullMarkers = data.map(loc => ({
       ...loc,
@@ -81,13 +62,8 @@ export default function LocationsScreen() {
       longitudeDelta: 0.01
     }));
     setMarkers(fullMarkers);
-    console.log("Markers set: ", fullMarkers);
   };
   
-
-  // function newLocationAdded() {
-  //   fetchLocations();
-  // }
 
   function toggleMapView() {
     setMapView(!mapView);
@@ -109,7 +85,7 @@ export default function LocationsScreen() {
 
   useFocusEffect(
     useCallback(() => {
-      fetchLocations(); // Refresh every time the tab is focused
+      fetchLocations(); 
     }, [])
   );
 
