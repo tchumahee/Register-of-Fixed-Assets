@@ -1,13 +1,15 @@
 import { FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 
 import { Text, View } from '@/components/Themed';
-import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { Marker, PoiClickEvent, PROVIDER_GOOGLE } from 'react-native-maps';
 import { FontAwesome } from '@expo/vector-icons';
 import AddNewEntryModal from '../components/add-new-entry-modal';
 import { useFocusEffect, useRouter } from 'expo-router';
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { getAllLocations, Location } from '../database/locationService';
 import globalStyles from '../styles/global';
+import AddNewLocation from '../components/location/add-new-location';
+import colors from '../styles/colors';
 
 
 const INITIAL_REGION = {
@@ -17,26 +19,22 @@ const INITIAL_REGION = {
   longitudeDelta: 5.0,
 }
 
-const placeholderLocations = [
-  {
-    id: 1,
-    latitude: 43.8563,
-    longitude: 18.4131,
-    name: "Sarajevo"
-  },
-  {
-    id: 2,
-    latitude: 44.7722,
-    longitude: 17.1910,
-    name: "Banja Luka"
-  }
-]
+// const placeholderLocations = [
+//   {
+//     id: 1,
+//     latitude: 43.8563,
+//     longitude: 18.4131,
+//     name: "Sarajevo"
+//   },
+//   {
+//     id: 2,
+//     latitude: 44.7722,
+//     longitude: 17.1910,
+//     name: "Banja Luka"
+//   }
+// ]
 
-const markers = placeholderLocations.map(loc => ({
-  ...loc,
-  latitudeDelta: 0.01,
-  longitudeDelta: 0.01
-}));
+
   
 function FloatingButtonIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>['name'];
@@ -59,19 +57,37 @@ export default function LocationsScreen() {
   const [mapView, setMapView] = useState(false);
 
   function addNewEntryModal() {
-    setModalIsVisible(true);
+    router.push({ pathname: `/(screens)/location/add-new-location`});
   }
 
   const [locations, setLocations] = useState<Location[]>([]);
+  const [markers, setMarkers] = useState<Array<{
+    id: number;
+    latitude: number;
+    longitude: number;
+    name: string;
+    latitudeDelta: number;
+    longitudeDelta: number;
+  }>>([]);
 
   const fetchLocations = async () => {
     const data = await getAllLocations();
     setLocations(data);
+    console.log("Locations set: ", data);
+  
+    const fullMarkers = data.map(loc => ({
+      ...loc,
+      latitudeDelta: 0.01,
+      longitudeDelta: 0.01
+    }));
+    setMarkers(fullMarkers);
+    console.log("Markers set: ", fullMarkers);
   };
+  
 
-  function newLocationAdded() {
-    fetchLocations();
-  }
+  // function newLocationAdded() {
+  //   fetchLocations();
+  // }
 
   function toggleMapView() {
     setMapView(!mapView);
@@ -81,7 +97,16 @@ export default function LocationsScreen() {
     // route to /(screens)/location/[location]
     router.push({ pathname: `/(screens)/location/[location]`, params: { location: JSON.stringify(location) } });
   };
+
+  const onMarkerSelected = (marker: any) => {
+    console.log("Marker " + marker.name + " selected.");
+  }
   
+
+  useEffect(() => {
+    fetchLocations();
+  }, []);
+
   useFocusEffect(
     useCallback(() => {
       fetchLocations(); // Refresh every time the tab is focused
@@ -96,19 +121,24 @@ export default function LocationsScreen() {
 
       {
         mapView ? (
-          <MapView style={StyleSheet.absoluteFill} provider={PROVIDER_GOOGLE}
+          <MapView 
+          style={StyleSheet.absoluteFill} 
+          provider={PROVIDER_GOOGLE}
           initialRegion={INITIAL_REGION}
           >
             {
-              markers.map((marker, index) => (
-                <Marker key={index} coordinate={marker}/>
+              markers.map(marker => (
+                <Marker
+                pinColor={colors.primary}
+                onPress={() => onMarkerSelected(marker)}
+                key={marker.id} coordinate={marker}/>
               ))
             }
           </MapView>
         ) : 
         (
           <FlatList
-          data={placeholderLocations}
+          data={locations}
           keyExtractor={(item) => item.id!.toString()}
           renderItem={
             ({item}) => 
@@ -138,11 +168,7 @@ export default function LocationsScreen() {
         <ViewButtonIcon name={mapView ? "list" : "map-marker"} color={'white'} />
       </TouchableOpacity>
       
-      <AddNewEntryModal 
-      modalIsVisible={modalIsVisible} 
-      setModalIsVisible={setModalIsVisible}
-      newEntryAdded={newLocationAdded}
-      ></AddNewEntryModal>
+      { modalIsVisible === true && <AddNewLocation></AddNewLocation>}
     </View>
   );
 }

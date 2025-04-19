@@ -77,6 +77,7 @@ export default function EmployeesScreen() {
       </TouchableOpacity>
       
       <AddNewEntryModal 
+      modalType='employee'
       modalIsVisible={modalIsVisible} 
       setModalIsVisible={setModalIsVisible}
       newEntryAdded={newEmployeeAdded}

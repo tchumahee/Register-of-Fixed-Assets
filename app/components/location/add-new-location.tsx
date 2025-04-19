@@ -1,8 +1,11 @@
 
-import React, { useState } from 'react';
-import {View, Modal, Text, TouchableOpacity, TextInput } from 'react-native';
+import React, { useCallback, useEffect, useState } from 'react';
+import {View, Modal, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native';
 import globalStyles from '../../styles/global';
-import { addLocation, Location, updateLocationById } from '../../database/locationService';
+import { addLocation, getAllLocations, Location, updateLocationById } from '../../database/locationService';
+import MapView, { Callout, Marker, PoiClickEvent, PROVIDER_GOOGLE } from 'react-native-maps';
+import colors from '@/app/styles/colors';
+import { useFocusEffect, useRouter } from 'expo-router';
 
 
 type AddNewLocationProps = {
@@ -13,51 +16,135 @@ type AddNewLocationProps = {
   setLocation: React.Dispatch<any>;
 };
 
+const INITIAL_REGION = {
+  latitude: 43.9159,
+  longitude: 17.6791,
+  latitudeDelta: 3.0,
+  longitudeDelta: 5.0,
+}
+
 
 // represents the form for editing / adding new locations. Directly calls the locationService
-export default function AddNewLocation({modalCanceled, addNewEntry, 
-  updateExisting = false, 
-  location = { id: 0, name: '', latitude: 0, longitude: 0 },
-  setLocation = () => {} } : AddNewLocationProps) {
+export default function AddNewLocation() 
+{
 
-  const [name, setName] = useState(location.name);
-  const [longitude, setLongitude] = useState(location.longitude);
-  const [latitude, setLatitude] = useState(location.latitude);
+  const router = useRouter();
 
-  async function addNewLocation() {
-    if (updateExisting) {
-      const updated = {
-        ...location,
-        name,
-        longitude,
-        latitude
-      };
-      const result = await updateLocationById(updated);
-      if (result) {
-        setLocation(result);
-      }
-    } else {
-      await addLocation(name, latitude, longitude);
-    }
-  
-    resetFields();
-    addNewEntry();
+  const [locations, setLocations] = useState<Location[]>([]);
+  const [markers, setMarkers] = useState<Array<{
+    id: number;
+    latitude: number;
+    longitude: number;
+    name: string;
+    latitudeDelta: number;
+    longitudeDelta: number;
+  }>>([]);
+
+  const [selectedLat, setSelectedLat] = useState<number | null>(null);
+  const [selectedLng, setSelectedLng] = useState<number | null>(null);
+  const [selectedName, setSelectedName] = useState<string | null>(null);
+
+  const poiClicked = (e: PoiClickEvent) => {
+    const { coordinate, name } = e.nativeEvent;
+    const { latitude, longitude } = coordinate;
+
+    // Store values in state
+    setSelectedLat(latitude);
+    setSelectedLng(longitude);
+    setSelectedName(name);
+
+    console.log({ latitude, longitude, name });
   }
 
-  function cancel() {
-    resetFields();
-    modalCanceled();
+  const fetchLocations = async () => {
+    const data = await getAllLocations();
+    setLocations(data);
+    console.log("Locations set: ", data);
+  
+    const fullMarkers = data.map(loc => ({
+      ...loc,
+      latitudeDelta: 0.01,
+      longitudeDelta: 0.01
+    }));
+    setMarkers(fullMarkers);
+    console.log("Markers set: ", fullMarkers);
+  };
+  
+
+
+  useEffect(() => {
+      fetchLocations();
+    }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      fetchLocations(); 
+    }, [])
+  );
+
+  async function addNewLocation() {
+    if(selectedName != null && selectedLat != null && selectedLng != null)
+      await addLocation(selectedName!, selectedLat!, selectedLng!);
+    router.push({ pathname: `/(tabs)/locations`});
   }
 
   function resetFields() {
-    setName('');
-    setLatitude(0);
-    setLongitude(0);
+    // setName('');
+    // setLatitude(0);
+    // setLongitude(0);
   }
 
 
   return (
-        <View>
+        <View style={globalStyles.viewContainer}>
+          <View style={globalStyles.viewContainer}>
+            <MapView 
+            onPoiClick={poiClicked}
+            style={StyleSheet.absoluteFillObject} 
+            provider={PROVIDER_GOOGLE}
+            initialRegion={INITIAL_REGION}
+            >
+              {
+                markers.map(marker => (
+                  <Marker
+                  key={marker.id} coordinate={marker}/>
+                ))
+              }
+
+              
+              {selectedLat !== null && selectedLng !== null && (
+                <Marker
+                  coordinate={{ latitude: selectedLat, longitude: selectedLng }}
+                  pinColor={colors.secondary} 
+                >
+                  <Callout>
+                    <View style={styles.calloutContainer}>
+                      <Text style={styles.calloutText}>{selectedName}</Text>
+                    </View>
+                  </Callout>
+                </Marker>
+              )}
+            </MapView>
+          </View>
+          <View>
+            <TouchableOpacity
+              onPress={addNewLocation}
+              style={globalStyles.buttonPrimary}
+              activeOpacity={0.8}>
+                <Text style={globalStyles.textDark}>Add</Text>
+            </TouchableOpacity> 
+          </View>
+          
         </View>
   );
 }
+
+const styles = StyleSheet.create({
+  calloutContainer: {
+    padding: 10,
+  },
+  calloutText: {
+    fontWeight: 'bold',
+    fontSize: 24
+  },
+});

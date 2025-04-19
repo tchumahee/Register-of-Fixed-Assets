@@ -4,15 +4,17 @@ import {View, Modal, Text, TouchableOpacity, TextInput } from 'react-native';
 import globalStyles from '../styles/global';
 import { addEmployee } from '../database/employeeService';
 import AddNewEmployee from './employee/add-new-employee';
+import AddNewLocation from './location/add-new-location';
 
 
 type ModalComponentProps = {
+  modalType: string;
   modalIsVisible: boolean;
   setModalIsVisible: React.Dispatch<React.SetStateAction<boolean>>;
   newEntryAdded: () => void;
 };
 
-export default function AddNewEntryModal({modalIsVisible, setModalIsVisible, newEntryAdded} : ModalComponentProps) {
+export default function AddNewEntryModal({modalType, modalIsVisible, setModalIsVisible, newEntryAdded} : ModalComponentProps) {
 
   function modalCanceled() {
     setModalIsVisible(false);
@@ -27,10 +29,10 @@ export default function AddNewEntryModal({modalIsVisible, setModalIsVisible, new
     <Modal animationType='slide' visible={modalIsVisible} style={globalStyles.modalWindow}>
       <View style={globalStyles.modalWindow}>
         <View style={globalStyles.contentContainer}>
-          <Text style={globalStyles.headerLight}>Add new employee</Text>
+          <Text style={globalStyles.headerLight}>Add new {modalType}</Text>
           <View style={globalStyles.infoContainer}>
 
-            <AddNewEmployee modalCanceled={modalCanceled} addNewEntry={addNewEntry}></AddNewEmployee>
+            { modalType === 'employee' && <AddNewEmployee modalCanceled={modalCanceled} addNewEntry={addNewEntry}></AddNewEmployee>}
 
           </View>
           

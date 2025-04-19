@@ -74,6 +74,11 @@ function RootLayoutNav() {
           title: "Assets at location"
         }
         }/>
+        <Stack.Screen name="(screens)/location/add-new-location"  
+        options={{
+          title: "Add new location"
+        }
+        }/>
       </Stack>
     </ThemeProvider>
   );
