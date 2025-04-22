@@ -94,6 +94,7 @@ export default function AddNewLocation()
               {
                 markers.map(marker => (
                   <Marker
+                  pinColor={colors.primary}
                   key={marker.id} coordinate={marker}/>
                 ))
               }
