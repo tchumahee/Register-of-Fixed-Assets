@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     borderRadius: 7,
-    backgroundColor: colors.containerBackground,
+    backgroundColor: colors.cardBackground,
     margin: 3
   },
   assetImage: {

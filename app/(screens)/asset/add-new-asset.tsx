@@ -70,7 +70,6 @@ export default function AddAssetScreen() {
         <View style={globalStyles.infoContainer}>
           <Text style={globalStyles.textLabel}>Name:</Text>
           <TextInput
-            placeholder="Asset Name"
             value={asset.name}
             onChangeText={(text) => setAsset({ ...asset, name: text })}
             style={globalStyles.textInput}
@@ -78,7 +77,6 @@ export default function AddAssetScreen() {
 
           <Text style={globalStyles.textLabel}>Description:</Text>
           <TextInput
-            placeholder="Description"
             value={asset.description}
             onChangeText={(text) => setAsset({ ...asset, description: text })}
             style={globalStyles.textInput}
@@ -86,25 +84,21 @@ export default function AddAssetScreen() {
 
           <Text style={globalStyles.textLabel}>Barcode:</Text>
           <TextInput
-            placeholder="Barcode"
             keyboardType="numeric"
-            value={asset.barcode?.toString()}
             onChangeText={(text) => setAsset({ ...asset, barcode: parseInt(text) || 0 })}
             style={globalStyles.textInput}
           />
 
           <Text style={globalStyles.textLabel}>Price:</Text>
           <TextInput
-            placeholder="Price"
-            keyboardType="numeric"
-            value={asset.price?.toString()}
+            inputMode='decimal'
             onChangeText={(text) => setAsset({ ...asset, price: parseFloat(text) || 0 })}
             style={globalStyles.textInput}
           />
 
+
           <Text style={globalStyles.textLabel}>Person:</Text>
           <TextInput
-            placeholder="Current Person"
             value={asset.current_person}
             onChangeText={(text) => setAsset({ ...asset, current_person: text })}
             style={globalStyles.textInput}
@@ -112,7 +106,6 @@ export default function AddAssetScreen() {
 
           <Text style={globalStyles.textLabel}>Asset Type:</Text>
           <TextInput
-            placeholder="Asset Type"
             value={asset.asset_type}
             onChangeText={(text) => setAsset({ ...asset, asset_type: text })}
             style={globalStyles.textInput}

@@ -30,8 +30,6 @@ export const initDatabase = async () => {
         lastname TEXT,
         email TEXT
       );
-
-      DROP TABLE IF EXISTS asset;
       
       -- Table: asset
       CREATE TABLE IF NOT EXISTS asset (

@@ -35,7 +35,7 @@ const globalStyles = StyleSheet.create({
         height: 50,
         flex: 1,
         borderBottomWidth: 1,
-        backgroundColor: colors.containerBackground,
+        backgroundColor: colors.cardBackground,
         borderRadius: 7,
         justifyContent: 'center',
         alignItems: 'center',
