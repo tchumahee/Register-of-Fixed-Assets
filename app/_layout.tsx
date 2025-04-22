@@ -74,6 +74,13 @@ function RootLayoutNav() {
           title: "Assets at location"
         }
         }/>
+        <Stack.Screen name="(screens)/asset/[asset]"  
+        options={{
+          title: "Asset details"
+        }
+        }/>
+
+
         <Stack.Screen name="(screens)/location/add-new-location"  
         options={{
           title: "Add new location"
@@ -88,7 +95,17 @@ function RootLayoutNav() {
             title: mode === 'edit' ? 'Edit employee' : 'Add new employee',
           };
         }}
-      />
+        />
+        <Stack.Screen
+        name="(screens)/asset/add-new-asset"
+        options={({ route }) => {
+          const params = route.params as { mode?: string };
+          const mode = params?.mode;
+          return {
+            title: mode === 'edit' ? 'Edit asset' : 'Add new asset',
+          };
+        }}
+        />
 
       </Stack>
     </ThemeProvider>

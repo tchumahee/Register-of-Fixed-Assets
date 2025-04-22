@@ -30,6 +30,8 @@ export const initDatabase = async () => {
         lastname TEXT,
         email TEXT
       );
+
+      DROP TABLE IF EXISTS asset;
       
       -- Table: asset
       CREATE TABLE IF NOT EXISTS asset (
@@ -39,11 +41,12 @@ export const initDatabase = async () => {
         barcode INTEGER,
         price REAL,
         creation_date TEXT,
-        current_person TEXT,
+        current_person INTEGER,
         current_location INTEGER,
         image TEXT,
         asset_type TEXT,
-        FOREIGN KEY (current_location) REFERENCES location(id)
+        FOREIGN KEY (current_location) REFERENCES location(id),
+        FOREIGN KEY (current_person) REFERENCES employee(id)
       );
       
       -- Table: census_list

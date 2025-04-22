@@ -77,12 +77,13 @@ const globalStyles = StyleSheet.create({
 
     modalWindow: {
         flex: 1,
-        backgroundColor: 'black'
+        backgroundColor: 'black',
+        
     },
 
     contentContainer: {
         flex:1,
-        margin: 30
+        margin: 30,
     },
     infoContainer: {
         flexDirection: 'column',
