@@ -72,7 +72,7 @@ const globalStyles = StyleSheet.create({
         ...baseFloatingButton,
         left: 30,
         bottom: 30,
-        backgroundColor: colors.primaryDarker
+        backgroundColor: colors.primary
     } as ViewStyle,
 
     modalWindow: {
@@ -87,12 +87,11 @@ const globalStyles = StyleSheet.create({
     },
     infoContainer: {
         flexDirection: 'column',
-        marginTop: 30,
         borderRadius: 20,
         // borderWidth: 2,
         // borderColor: colors.secondaryDarker,
         minHeight: 90,
-        padding: 15,
+        padding: 20,
         backgroundColor: colors.containerBackground,
     },
 

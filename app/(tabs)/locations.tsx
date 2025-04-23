@@ -141,7 +141,7 @@ export default function LocationsScreen() {
       activeOpacity={0.8} 
       onPress={toggleMapView}
       style={globalStyles.floatingButtonLeft}>
-        <ViewButtonIcon name={mapView ? "list" : "map-marker"} color={'white'} />
+        <ViewButtonIcon name={mapView ? "list" : "map-marker"} color={'black'} />
       </TouchableOpacity>
       
       { modalIsVisible === true && <AddNewLocation></AddNewLocation>}

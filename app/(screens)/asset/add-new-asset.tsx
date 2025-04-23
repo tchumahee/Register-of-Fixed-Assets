@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, TextInput, TouchableOpacity, Image } from 'react-native';
+import { View, Text, TextInput, TouchableOpacity, Image, StyleSheet, ScrollView } from 'react-native';
+import { CameraView, CameraType, useCameraPermissions } from 'expo-camera';
 import * as ImagePicker from 'expo-image-picker';
 import * as ImageManipulator from 'expo-image-manipulator';
 import { useLocalSearchParams, useRouter } from 'expo-router';
@@ -29,6 +30,8 @@ export default function AddAssetScreen() {
 
   const [asset, setAsset] = useState<Asset>(initialAsset);
   const [imageUri, setImageUri] = useState(asset.image);
+
+  const [cameraPermissions, requestCameraPermissions] = useCameraPermissions();
 
   const pickImage = async () => {
     const result = await ImagePicker.launchImageLibraryAsync({
@@ -67,7 +70,7 @@ export default function AddAssetScreen() {
   return (
     <View style={globalStyles.modalWindow}>
       <View style={globalStyles.contentContainer}>
-        <View style={globalStyles.infoContainer}>
+        <ScrollView style={globalStyles.infoContainer}>
           <Text style={globalStyles.textLabel}>Name:</Text>
           <TextInput
             value={asset.name}
@@ -139,8 +142,14 @@ export default function AddAssetScreen() {
               <Text style={globalStyles.textLight}>Cancel</Text>
             </TouchableOpacity>
           </View>
-        </View>
+        </ScrollView>
       </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  camera: {
+    flex:1
+  }
+})
