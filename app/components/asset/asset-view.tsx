@@ -2,8 +2,10 @@ import { Text, TouchableOpacity, View, Image, StyleSheet } from "react-native";
 import globalStyles from "../../styles/global";
 import { Asset } from "../../database/assetService";
 import { FontAwesome } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
 import colors from "../../styles/colors";
+import { getLocationById, Location } from "@/app/database/locationService";
+import { Employee, getEmployeeById } from "@/app/database/employeeService";
+import { useEffect, useState } from "react";
 
 function OptionIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>['name'];
@@ -19,6 +21,24 @@ type AssetViewProps = {
 };
 
 export default function AssetView({ asset, editAssetClicked, deleteAssetClicked }: AssetViewProps) {
+
+  const [location, setLocation] = useState<Location | null>(null);
+  const [employee, setEmployee] = useState<Employee | null>(null);
+
+  useEffect(() => {
+    const loadDetails = async () => {
+      const loc = await getLocationById(asset.current_location);
+      const emp = await getEmployeeById(asset.current_person);
+      setLocation(loc);
+      setEmployee(emp);
+    };
+  
+    loadDetails();
+  }, []);
+
+  console.log(employee);
+  console.log(location);
+
   return (
     <View>
       <View style={globalStyles.buttonViewHR}>
@@ -38,7 +58,6 @@ export default function AssetView({ asset, editAssetClicked, deleteAssetClicked 
         </TouchableOpacity>
       </View>
 
-      {/* IMAGE PREVIEW */}
       {asset.image ? (
         <Image
           source={{ uri: asset.image }}
@@ -47,7 +66,6 @@ export default function AssetView({ asset, editAssetClicked, deleteAssetClicked 
         />
       ) : null}
 
-      {/* ASSET DETAILS */}
       <View>
         <Text style={globalStyles.textLight}>{asset.id}</Text>
         <Text style={globalStyles.textLight}>{asset.name}</Text>
@@ -56,8 +74,8 @@ export default function AssetView({ asset, editAssetClicked, deleteAssetClicked 
         <Text style={globalStyles.textLight}>{asset.barcode}</Text>
         <Text style={globalStyles.textLight}>{asset.price}</Text>
         <Text style={globalStyles.textLight}>{asset.creation_date}</Text>
-        <Text style={globalStyles.textLight}>{asset.current_location}</Text>
-        <Text style={globalStyles.textLight}>{asset.current_person}</Text>
+        <Text style={globalStyles.textLight}>{location ? location.name : 'Loading...'}</Text>
+        <Text style={globalStyles.textLight}>{employee ? employee.name + " " + employee.lastname : 'Loading...'}</Text>
       </View>
     </View>
   );

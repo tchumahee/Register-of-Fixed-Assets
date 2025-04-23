@@ -11,6 +11,9 @@ import globalStyles from '../../styles/global';
 import { addAsset, updateAssetById, Asset } from '../../database/assetService';
 import { BackHandler } from 'react-native';
 import { useEffect } from 'react';
+import { Picker } from '@react-native-picker/picker';
+import { Employee, getAllEmployees } from '@/app/database/employeeService';
+import { getAllLocations, Location } from '@/app/database/locationService';
 
 
 // ... (imports stay the same)
@@ -37,6 +40,13 @@ export default function AddAssetScreen() {
   };
 
   const [asset, setAsset] = useState<Asset>(initialAsset);
+
+  const [employees, setEmployees] = useState<Employee[]>([]);
+  const [locations, setLocations] = useState<Location[]>([]);
+
+  const [selectedEmployeeId, setSelectedEmployeeId] = useState(asset?.current_person || null);
+  const [selectedLocationId, setSelectedLocationId] = useState(asset?.current_location || null);
+
   const [imageUri, setImageUri] = useState(asset.image);
   const [showCamera, setShowCamera] = useState(false);
   const [cameraMode, setCameraMode] = useState<'scan' | 'photo' | null>(null);
@@ -65,6 +75,16 @@ export default function AddAssetScreen() {
   
     return () => backHandler.remove();
   }, [showCamera]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const employeeData = await getAllEmployees();
+      const locationData = await getAllLocations();
+      setEmployees(employeeData);
+      setLocations(locationData);
+    };
+    fetchData();
+  }, []);
   
 
   const pickImage = async () => {
@@ -200,12 +220,29 @@ export default function AddAssetScreen() {
             style={globalStyles.textInput}
           />
 
-          <Text style={globalStyles.textLabel}>Person:</Text>
-          <TextInput
-            value={asset.current_person}
-            onChangeText={(text) => setAsset({ ...asset, current_person: text })}
-            style={globalStyles.textInput}
-          />
+          <Text style={globalStyles.textLabel}>Current Person:</Text>
+          <Picker
+            style={globalStyles.dropdown}
+            selectedValue={selectedEmployeeId}
+            onValueChange={(itemValue) => {setAsset({ ...asset, current_person: itemValue! })}}
+          >
+            <Picker.Item label="Select Employee" value={null} />
+            {employees.map((emp) => (
+              <Picker.Item key={emp.id} label={`${emp.name + " " + emp.lastname}`} value={emp.id} />
+            ))}
+          </Picker>
+
+          <Text style={globalStyles.textLabel}>Current Location:</Text>
+          <Picker
+            style={globalStyles.dropdown}
+            selectedValue={selectedLocationId}
+            onValueChange={(itemValue) => {setAsset({ ...asset, current_location: itemValue! })}}
+          >
+            <Picker.Item label="Select Location" value={null} />
+            {locations.map((loc) => (
+              <Picker.Item key={loc.id} label={loc.name} value={loc.id} />
+            ))}
+          </Picker>
 
           <Text style={globalStyles.textLabel}>Asset Type:</Text>
           <TextInput

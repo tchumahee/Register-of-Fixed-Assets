@@ -7,7 +7,7 @@ export interface Asset {
   barcode: number;
   price: number;
   creation_date: string;
-  current_person: string;
+  current_person: number;
   current_location: number;
   image: string;
   asset_type: string;

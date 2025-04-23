@@ -158,15 +158,24 @@ const globalStyles = StyleSheet.create({
     },
 
     textInput: {
-        backgroundColor: 'black',
+        backgroundColor: 'white',
         margin: 5,
         padding: 4,
         borderRadius: 8,
-        borderWidth: 1,
-        borderColor: colors.secondary,
-        color: 'white',
-        fontSize: 20
+        color: 'black',
+        fontSize: 20,
+        height: 40
     },
+
+    dropdown: {
+        backgroundColor: 'white',
+        color: 'black',
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 4,
+        margin: 5,
+    }
 })
 
 export default globalStyles;
