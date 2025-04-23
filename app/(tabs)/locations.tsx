@@ -91,9 +91,6 @@ export default function LocationsScreen() {
 
   return (
     <View style={globalStyles.viewContainer}>
-      
-
-
       {
         mapView ? (
           <MapView 

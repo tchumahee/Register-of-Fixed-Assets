@@ -8,7 +8,7 @@ import AssetView from "@/app/components/asset/asset-view";
 import { Asset } from "@/app/database/assetService";
 import { useFocusEffect } from "@react-navigation/native";
 
-export default function User() {
+export default function AssetDetails() {
   const router = useRouter();
   const { asset } = useGlobalSearchParams();
   const [assetObj, setAssetObj] = useState<Asset | null>(null);

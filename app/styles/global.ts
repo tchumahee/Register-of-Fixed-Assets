@@ -59,7 +59,7 @@ const globalStyles = StyleSheet.create({
     },
     textLabel: {
         fontSize: 16,
-        color: colors.secondary
+        color: colors.primary
     },
 
     floatingButtonRight: {
@@ -86,6 +86,7 @@ const globalStyles = StyleSheet.create({
         margin: 30,
     },
     infoContainer: {
+        flex:1,
         flexDirection: 'column',
         borderRadius: 20,
         // borderWidth: 2,
@@ -158,23 +159,30 @@ const globalStyles = StyleSheet.create({
     },
 
     textInput: {
-        backgroundColor: 'white',
+        backgroundColor: colors.inputBackground,
         margin: 5,
-        padding: 4,
+        padding: 7,
         borderRadius: 8,
-        color: 'black',
-        fontSize: 20,
+        color: colors.inputTextColor,
+        fontSize: 17,
         height: 40
     },
 
     dropdown: {
-        backgroundColor: 'white',
-        color: 'black',
+        backgroundColor: colors.inputBackground,
+        color: colors.inputTextColor,
         height: 50,
         justifyContent: 'center',
         alignItems: 'center',
         padding: 4,
         margin: 5,
+    },
+
+    separator: {
+        height: 3,
+        borderRadius: 1,
+        margin: 10,
+        backgroundColor: colors.primaryLighter
     }
 })
 

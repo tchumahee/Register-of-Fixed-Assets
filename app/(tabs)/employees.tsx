@@ -52,12 +52,12 @@ export default function EmployeesScreen() {
         data={employees}
         keyExtractor={(item) => item.id!.toString()}
         renderItem={({item}) => 
-        <TouchableOpacity
-        onPress={() => handlePress(item)}
-        activeOpacity={0.8}
-        style={globalStyles.listItem}
-        >
-          <Text style={globalStyles.textLight}>{item.name + " " + item.lastname}</Text></TouchableOpacity>}    
+          <TouchableOpacity
+          onPress={() => handlePress(item)}
+          activeOpacity={0.8}
+          style={globalStyles.listItem}
+          >
+            <Text style={globalStyles.textLight}>{item.name + " " + item.lastname}</Text></TouchableOpacity>}    
       >
       
       </FlatList>

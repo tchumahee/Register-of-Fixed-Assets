@@ -1,14 +1,17 @@
 import globalStyles from "@/app/styles/global";
 import { useGlobalSearchParams, useRouter } from "expo-router";
 import { StyleSheet, View } from "react-native";
-import { deleteEmployeeById, getEmployeeById } from "@/app/database/employeeService";
+import {
+  deleteEmployeeById,
+  getEmployeeById,
+} from "@/app/database/employeeService";
 import colors from "@/app/styles/colors";
 import { useState, useEffect, useCallback } from "react";
 import EmployeeView from "@/app/components/employee/employee-view";
 import { Employee } from "@/app/database/employeeService";
 import { useFocusEffect } from "@react-navigation/native";
 
-export default function User() {
+export default function EmployeeDetails() {
   const router = useRouter();
   const { employee } = useGlobalSearchParams();
   const [employeeObj, setEmployeeObj] = useState<Employee | null>(null);

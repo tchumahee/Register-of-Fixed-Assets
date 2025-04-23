@@ -36,9 +36,6 @@ export default function AssetView({ asset, editAssetClicked, deleteAssetClicked 
     loadDetails();
   }, []);
 
-  console.log(employee);
-  console.log(location);
-
   return (
     <View>
       <View style={globalStyles.buttonViewHR}>

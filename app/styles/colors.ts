@@ -10,7 +10,9 @@ const colors = {
     cardBackground: '#5a192b', //'#222222',
     modalBackground: '#444444',
     textLight: 'white',
-    textDark: 'black'
+    textDark: 'black',
+    inputBackground: '#444',
+    inputTextColor: 'white',
 }
 
 export default colors;
