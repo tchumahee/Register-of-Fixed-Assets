@@ -119,6 +119,18 @@ const globalStyles = StyleSheet.create({
         backgroundColor: colors.secondaryDarker,
     },
 
+    buttonCameraShutter: {
+        height: 70,
+        width: 70,
+        borderRadius: 35,
+        backgroundColor: colors.primary,
+        borderWidth: 3,
+        borderColor: colors.primaryLighter,
+        position: 'absolute',
+        bottom: 70,
+        alignSelf: 'center'
+    },
+
     buttonViewH: {
         flexDirection: 'row'
     },

@@ -70,7 +70,6 @@ export default function LocationsScreen() {
   }
 
   const handlePress = (location: Location) => {
-    // route to /(screens)/location/[location]
     router.push({ pathname: `/(screens)/location/[location]`, params: { location: JSON.stringify(location) } });
   };
 
