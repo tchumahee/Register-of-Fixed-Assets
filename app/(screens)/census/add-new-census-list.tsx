@@ -8,8 +8,9 @@ import {
   Image,
   StyleSheet,
   Alert,
+  BackHandler,
 } from "react-native";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
 import { CensusItem } from "@/app/database/censusService";
 import globalStyles from "@/app/styles/global";
 import { FontAwesome } from "@expo/vector-icons";
@@ -51,6 +52,21 @@ export default function AddNewCensusList() {
     fetchData();
   }, []);
 
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        router.replace("/(tabs)");
+        return true;
+      };
+
+      BackHandler.addEventListener("hardwareBackPress", onBackPress);
+
+      return () => {
+        BackHandler.removeEventListener("hardwareBackPress", onBackPress);
+      };
+    }, [router])
+  );
+
   useEffect(() => {
     if (updatedCensusItems) {
       try {
@@ -91,7 +107,7 @@ export default function AddNewCensusList() {
   };
 
   const handleEditItem = (itemToEdit: CensusItem) => {
-    router.push({
+    router.replace({
       pathname: "/(screens)/census/census-item/add-new-census-item", // Or a dedicated edit screen
       params: {
         itemToEdit: JSON.stringify(itemToEdit),

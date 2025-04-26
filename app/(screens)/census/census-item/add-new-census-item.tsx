@@ -129,7 +129,7 @@ export default function AddCensusItemScreen() {
       updatedItems = [...existingList, newItemWithId];
     }
 
-    router.push({
+    router.replace({
       pathname: "/(screens)/census/add-new-census-list",
       params: {
         updatedCensusItems: JSON.stringify(updatedItems),

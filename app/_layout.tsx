@@ -92,12 +92,6 @@ function RootLayoutNav() {
             title: "Census details",
           }}
         />
-        <Stack.Screen
-          name="(screens)/census/census-item/[id]"
-          options={{
-            title: "Census item details",
-          }}
-        />
 
         <Stack.Screen
           name="(screens)/location/add-new-location"
@@ -131,13 +125,21 @@ function RootLayoutNav() {
             };
           }}
         />
+        <Stack.Screen
+          name="(screens)/census/census-item/add-new-census-item"
+          options={{
+            title: "Add New Item",
+          }}
+        />
+
+        <Stack.Screen
+          name="(screens)/census/census-item/[item]"
+          options={{
+            headerShown: false,
+            title: "Item Details",
+          }}
+        />
       </Stack>
-      {/* <Stack.Screen
-        name="(screens)/census/census-item/add-new-census-item"
-        options={{
-          title: "Census item details",
-        }}
-      /> */}
     </ThemeProvider>
   );
 }
