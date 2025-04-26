@@ -53,8 +53,11 @@ export const initDatabase = async () => {
         date TEXT
       );
       
+
+      DROP TABLE IF EXISTS census_item;
       -- Table: census_item
       CREATE TABLE IF NOT EXISTS census_item (
+        id INTEGER,
         asset_id INTEGER,
         census_list_id INTEGER,
         previous_location INTEGER,

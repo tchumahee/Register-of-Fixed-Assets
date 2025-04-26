@@ -57,6 +57,10 @@ const globalStyles = StyleSheet.create({
         color: colors.textLight,
         fontSize: 16
     },
+    textLightS: {
+        color: colors.textLight,
+        fontSize: 10
+    },
     textLabel: {
         fontSize: 16,
         color: colors.primary
@@ -120,6 +124,14 @@ const globalStyles = StyleSheet.create({
         backgroundColor: colors.secondaryDarker,
     },
 
+    buttonAddListItem: {
+        ...baseButton,
+        backgroundColor: colors.secondaryDarker,
+        position: 'absolute',
+        bottom: 50,
+        alignSelf: 'center'
+    },
+
     buttonCameraShutter: {
         height: 70,
         width: 70,
@@ -172,10 +184,12 @@ const globalStyles = StyleSheet.create({
         backgroundColor: colors.inputBackground,
         color: colors.inputTextColor,
         height: 50,
+        maxHeight: 50,
         justifyContent: 'center',
         alignItems: 'center',
         padding: 4,
         margin: 5,
+        flex:1
     },
 
     separator: {

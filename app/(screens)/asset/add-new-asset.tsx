@@ -278,7 +278,7 @@ export default function AddAssetScreen() {
               setAsset({ ...asset, current_person: itemValue! });
             }}
           >
-            <Picker.Item label="Select Employee" value={null} />
+            <Picker.Item label="-- Select Employee --" value={null} />
             {employees.map((emp) => (
               <Picker.Item
                 key={emp.id}
@@ -296,7 +296,7 @@ export default function AddAssetScreen() {
               setAsset({ ...asset, current_location: itemValue! });
             }}
           >
-            <Picker.Item label="Select Location" value={null} />
+            <Picker.Item label="-- Select Location --" value={null} />
             {locations.map((loc) => (
               <Picker.Item key={loc.id} label={loc.name} value={loc.id} />
             ))}

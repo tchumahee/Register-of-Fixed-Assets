@@ -131,4 +131,11 @@ export const getAssetsByLocation = async (locationId: number): Promise<Asset[]> 
     console.log(`✅ Assets fetched for person "${personId}"`);
     return assets;
   };
+
+  export async function getAssetByBarcode(barcode: string): Promise<Asset | null> {
+    const db = await getDatabase();
+    const result = await db.getFirstAsync('SELECT * FROM asset WHERE barcode = ?', [barcode]);
+    return result ? result as Asset : null;
+  }
+  
   
