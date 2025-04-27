@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
   View,
-  TextInput,
   Text,
   TouchableOpacity,
   FlatList,
@@ -17,8 +16,12 @@ import {
   CensusItem,
 } from "@/app/database/censusService";
 import globalStyles from "@/app/styles/global";
-import { FontAwesome } from "@expo/vector-icons";
-import { Asset, getAllAssets } from "@/app/database/assetService";
+import {
+  Asset,
+  getAllAssets,
+  getAssetById,
+  updateAssetById,
+} from "@/app/database/assetService";
 import colors from "@/app/styles/colors";
 import { getAllLocations, Location } from "@/app/database/locationService";
 import { Employee, getAllEmployees } from "@/app/database/employeeService";
@@ -29,7 +32,6 @@ export default function AddNewCensusList() {
     updatedCensusItems?: string;
   }>();
 
-  //const [date, setDate] = useState("");
   const router = useRouter();
 
   const [censusItems, setCensusItems] = useState<CensusItem[]>([]);
@@ -98,31 +100,38 @@ export default function AddNewCensusList() {
 
     try {
       const censusListId = await addCensusList(date);
+
       await Promise.all(
-        censusItems.map((item) => {
+        censusItems.map(async (item) => {
           item.census_list_id = censusListId;
-          return addCensusItem(item);
+          await addCensusItem(item);
+
+          const assetToUpdate = await getAssetById(item.asset_id);
+
+          if (!assetToUpdate || !assetToUpdate.id) {
+            throw new Error(`Asset with ID ${item.asset_id} not found`);
+          }
+
+          const updatedAsset: Asset = {
+            ...assetToUpdate,
+            current_person: item.new_person,
+            current_location: item.new_location,
+            id: assetToUpdate.id,
+          };
+
+          await updateAssetById(updatedAsset);
         })
       );
+
       router.push("/(tabs)/census");
     } catch (error) {
       Alert.alert("Error", "Failed to save the census list.");
     }
-
-    // Here you would likely call addCensusList(date, censusItems) or similar
-    // and then navigate away, perhaps back to the main census screen.
-    // Example:
-    // try {
-    //   await addCensusList({ date: date, items: censusItems }); // Adjust based on your actual service function
-    //   router.back(); // or router.push('/(tabs)/census');
-    // } catch (error) {
-    //   Alert.alert("Error", "Failed to save the census list.");
-    // }
   };
 
   const handleEditItem = (itemToEdit: CensusItem) => {
     router.replace({
-      pathname: "/(screens)/census/census-item/add-new-census-item", // Or a dedicated edit screen
+      pathname: "/(screens)/census/census-item/add-new-census-item",
       params: {
         itemToEdit: JSON.stringify(itemToEdit),
         currentItems: JSON.stringify(
