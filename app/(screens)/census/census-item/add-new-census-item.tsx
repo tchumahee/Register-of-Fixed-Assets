@@ -109,7 +109,6 @@ export default function AddCensusItemScreen() {
         existingList = JSON.parse(currentItems);
       } catch (error) {
         console.error("Failed to parse currentItems in Add Screen:", error);
-        Alert.alert("Error", "Could not retrieve the existing items list.");
         return;
       }
     }
@@ -252,12 +251,17 @@ export default function AddCensusItemScreen() {
               selectedValue={censusItem.asset_id}
               onValueChange={(itemValue) => assetSelected(itemValue)}
             >
-              <Picker.Item label="-- Select Asset --" value={0} />
+              <Picker.Item
+                label="-- Select Asset --"
+                value={0}
+                style={globalStyles.dropdownItem}
+              />
               {assets.map((asset) => (
                 <Picker.Item
                   key={asset.id}
                   label={asset.name}
                   value={asset.id}
+                  style={globalStyles.dropdownItem}
                 />
               ))}
             </Picker>
@@ -289,9 +293,18 @@ export default function AddCensusItemScreen() {
               setCensusItem({ ...censusItem, new_location: itemValue! })
             }
           >
-            <Picker.Item label="-- Select New Location --" value={0} />
+            <Picker.Item
+              label="-- Select New Location --"
+              value={0}
+              style={globalStyles.dropdownItem}
+            />
             {locations.map((loc) => (
-              <Picker.Item key={loc.id} label={loc.name} value={loc.id} />
+              <Picker.Item
+                key={loc.id}
+                label={loc.name}
+                value={loc.id}
+                style={globalStyles.dropdownItem}
+              />
             ))}
           </Picker>
 
@@ -303,12 +316,17 @@ export default function AddCensusItemScreen() {
               setCensusItem({ ...censusItem, new_person: itemValue! })
             }
           >
-            <Picker.Item label="-- Select New Employee --" value={0} />
+            <Picker.Item
+              label="-- Select New Employee --"
+              value={0}
+              style={globalStyles.dropdownItem}
+            />
             {employees.map((emp) => (
               <Picker.Item
                 key={emp.id}
                 label={`${emp.name} ${emp.lastname}`}
                 value={emp.id}
+                style={globalStyles.dropdownItem}
               />
             ))}
           </Picker>

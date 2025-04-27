@@ -191,6 +191,10 @@ const globalStyles = StyleSheet.create({
         margin: 5,
         flex:1
     },
+    dropdownItem: {
+        backgroundColor: colors.inputBackground,
+        color: 'white'
+    },
 
     separator: {
         height: 3,

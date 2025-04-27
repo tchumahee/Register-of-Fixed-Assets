@@ -23,6 +23,7 @@ import { Employee, getAllEmployees } from "@/app/database/employeeService";
 import { getAllLocations, Location } from "@/app/database/locationService";
 import colors from "@/app/styles/colors";
 import { FontAwesome } from "@expo/vector-icons";
+import { getFormattedCurrentDate } from "@/app/utils/dateUtil";
 
 function OptionIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>["name"];
@@ -47,7 +48,7 @@ export default function AddAssetScreen() {
         description: "",
         barcode: 0,
         price: 0,
-        creation_date: new Date().toISOString(),
+        creation_date: getFormattedCurrentDate(),
         current_person: "",
         current_location: 0,
         image: "",
@@ -85,7 +86,7 @@ export default function AddAssetScreen() {
     const backAction = () => {
       if (showCamera) {
         setShowCamera(false);
-        return true; // prevents exiting the screen
+        return true;
       }
       return false;
     };
@@ -168,6 +169,11 @@ export default function AddAssetScreen() {
   };
 
   const handleSubmit = async () => {
+    if (!asset.name || !asset.description || !asset.barcode) {
+      Alert.alert("Missing Info", "Please fill in all required fields.");
+      return;
+    }
+
     const updated = { ...asset, image: imageUri };
 
     if (isUpdate) {
@@ -280,12 +286,17 @@ export default function AddAssetScreen() {
                   setAsset({ ...asset, current_person: itemValue! });
                 }}
               >
-                <Picker.Item label="-- Select Employee --" value={null} />
+                <Picker.Item
+                  label="-- Select Employee --"
+                  value={null}
+                  style={globalStyles.dropdownItem}
+                />
                 {employees.map((emp) => (
                   <Picker.Item
                     key={emp.id}
                     label={`${emp.name + " " + emp.lastname}`}
                     value={emp.id}
+                    style={globalStyles.dropdownItem}
                   />
                 ))}
               </Picker>
@@ -298,9 +309,18 @@ export default function AddAssetScreen() {
                   setAsset({ ...asset, current_location: itemValue! });
                 }}
               >
-                <Picker.Item label="-- Select Location --" value={null} />
+                <Picker.Item
+                  label="-- Select Location --"
+                  value={null}
+                  style={globalStyles.dropdownItem}
+                />
                 {locations.map((loc) => (
-                  <Picker.Item key={loc.id} label={loc.name} value={loc.id} />
+                  <Picker.Item
+                    key={loc.id}
+                    label={loc.name}
+                    value={loc.id}
+                    style={globalStyles.dropdownItem}
+                  />
                 ))}
               </Picker>
             </View>
