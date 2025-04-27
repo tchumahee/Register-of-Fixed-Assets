@@ -6,6 +6,7 @@ import colors from "../../styles/colors";
 import { getLocationById, Location } from "@/app/database/locationService";
 import { Employee, getEmployeeById } from "@/app/database/employeeService";
 import { useEffect, useState } from "react";
+import { useRouter } from "expo-router";
 
 function OptionIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>["name"];
@@ -27,6 +28,8 @@ export default function AssetView({
   editAssetClicked,
   deleteAssetClicked,
 }: AssetViewProps) {
+  const router = useRouter();
+
   const [location, setLocation] = useState<Location | null>(null);
   const [employee, setEmployee] = useState<Employee | null>(null);
 
@@ -41,10 +44,29 @@ export default function AssetView({
     loadDetails();
   }, []);
 
+  function showLocationClicked() {
+    if (!location) return;
+
+    router.push({
+      pathname: "/(tabs)/locations",
+      params: {
+        mapViewVisible: "true",
+        location: JSON.stringify(location),
+      },
+    });
+  }
+
   return (
     <View>
       {editable && (
         <View style={globalStyles.buttonViewHR}>
+          <TouchableOpacity
+            onPress={showLocationClicked}
+            activeOpacity={0.8}
+            style={globalStyles.optionsButton}
+          >
+            <OptionIcon name="map-marker" color={colors.secondary} />
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={editAssetClicked}
             activeOpacity={0.8}

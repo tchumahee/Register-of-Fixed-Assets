@@ -7,7 +7,7 @@ import MapView, {
   PROVIDER_GOOGLE,
 } from "react-native-maps";
 import { FontAwesome } from "@expo/vector-icons";
-import { useFocusEffect, useRouter } from "expo-router";
+import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
 import { useCallback, useEffect, useState } from "react";
 import { getAllLocations, Location } from "../database/locationService";
 import globalStyles from "../styles/global";
@@ -40,6 +40,17 @@ export default function LocationsScreen() {
   const [modalIsVisible, setModalIsVisible] = useState(false);
   const [mapView, setMapView] = useState(false);
 
+  const params = useLocalSearchParams();
+  const [centerLocation, setCenterLocation] = useState<Location | null>(null);
+
+  useEffect(() => {
+    if (params?.location) {
+      const loc = JSON.parse(params.location as string);
+      setCenterLocation(loc);
+      setMapView(true);
+    }
+  }, [params?.location]);
+
   function addNewEntryModal() {
     router.push({ pathname: `/(screens)/location/add-new-location` });
   }
@@ -69,6 +80,7 @@ export default function LocationsScreen() {
   };
 
   function toggleMapView() {
+    setCenterLocation(null);
     setMapView(!mapView);
   }
 
@@ -99,7 +111,16 @@ export default function LocationsScreen() {
         <MapView
           style={StyleSheet.absoluteFill}
           provider={PROVIDER_GOOGLE}
-          initialRegion={INITIAL_REGION}
+          initialRegion={
+            centerLocation
+              ? {
+                  latitude: centerLocation.latitude,
+                  longitude: centerLocation.longitude,
+                  latitudeDelta: 0.01,
+                  longitudeDelta: 0.01,
+                }
+              : INITIAL_REGION
+          }
         >
           {markers.map((marker) => (
             <Marker
