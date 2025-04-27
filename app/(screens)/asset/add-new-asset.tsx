@@ -270,37 +270,41 @@ export default function AddAssetScreen() {
             style={globalStyles.textInput}
           />
 
-          <Text style={globalStyles.textLabel}>Current Person:</Text>
-          <Picker
-            style={globalStyles.dropdown}
-            selectedValue={selectedEmployeeId}
-            onValueChange={(itemValue) => {
-              setAsset({ ...asset, current_person: itemValue! });
-            }}
-          >
-            <Picker.Item label="-- Select Employee --" value={null} />
-            {employees.map((emp) => (
-              <Picker.Item
-                key={emp.id}
-                label={`${emp.name + " " + emp.lastname}`}
-                value={emp.id}
-              />
-            ))}
-          </Picker>
+          {!isUpdate && (
+            <View>
+              <Text style={globalStyles.textLabel}>Current Person:</Text>
+              <Picker
+                style={globalStyles.dropdown}
+                selectedValue={selectedEmployeeId}
+                onValueChange={(itemValue) => {
+                  setAsset({ ...asset, current_person: itemValue! });
+                }}
+              >
+                <Picker.Item label="-- Select Employee --" value={null} />
+                {employees.map((emp) => (
+                  <Picker.Item
+                    key={emp.id}
+                    label={`${emp.name + " " + emp.lastname}`}
+                    value={emp.id}
+                  />
+                ))}
+              </Picker>
 
-          <Text style={globalStyles.textLabel}>Current Location:</Text>
-          <Picker
-            style={globalStyles.dropdown}
-            selectedValue={selectedLocationId}
-            onValueChange={(itemValue) => {
-              setAsset({ ...asset, current_location: itemValue! });
-            }}
-          >
-            <Picker.Item label="-- Select Location --" value={null} />
-            {locations.map((loc) => (
-              <Picker.Item key={loc.id} label={loc.name} value={loc.id} />
-            ))}
-          </Picker>
+              <Text style={globalStyles.textLabel}>Current Location:</Text>
+              <Picker
+                style={globalStyles.dropdown}
+                selectedValue={selectedLocationId}
+                onValueChange={(itemValue) => {
+                  setAsset({ ...asset, current_location: itemValue! });
+                }}
+              >
+                <Picker.Item label="-- Select Location --" value={null} />
+                {locations.map((loc) => (
+                  <Picker.Item key={loc.id} label={loc.name} value={loc.id} />
+                ))}
+              </Picker>
+            </View>
+          )}
 
           <Text style={globalStyles.textLabel}>Asset Type:</Text>
           <TextInput
