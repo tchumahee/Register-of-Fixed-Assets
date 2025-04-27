@@ -5,6 +5,7 @@ import {
   Image,
   StyleSheet,
   FlatList,
+  Alert,
 } from "react-native";
 import globalStyles from "../../styles/global";
 import {
@@ -39,13 +40,29 @@ export default function CensusView({
   const router = useRouter();
 
   const deleteCensusListPressed = async () => {
-    try {
-      await deleteCensusList(censusList.id);
-      console.log("Transfer list deleted");
-      router.replace("/(tabs)/census");
-    } catch (error) {
-      console.error("Failed to delete transfer list:", error);
-    }
+    Alert.alert(
+      "Confirm Deletion",
+      "Are you sure you want to delete this transfer list?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "Delete",
+          onPress: async () => {
+            try {
+              await deleteCensusList(censusList.id);
+              console.log("Transfer list deleted");
+              router.replace("/(tabs)/census");
+            } catch (error) {
+              console.error("Failed to delete transfer list:", error);
+            }
+          },
+        },
+      ],
+      { cancelable: true }
+    );
   };
 
   const handlePress = (censusItemWithDetails: CensusItemWithDetails) => {

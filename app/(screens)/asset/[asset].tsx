@@ -1,6 +1,6 @@
 import globalStyles from "@/app/styles/global";
 import { useGlobalSearchParams, useRouter } from "expo-router";
-import { StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 import { deleteAssetById, getAssetById } from "@/app/database/assetService";
 import colors from "@/app/styles/colors";
 import { useState, useEffect, useCallback } from "react";
@@ -45,13 +45,29 @@ export default function AssetDetails() {
   const deleteAssetClicked = async () => {
     if (!assetObj) return;
 
-    try {
-      await deleteAssetById(assetObj.id);
-      console.log("Asset deleted");
-      router.replace("/(tabs)");
-    } catch (error) {
-      console.error("Failed to delete asset:", error);
-    }
+    Alert.alert(
+      "Confirm Deletion",
+      "Are you sure you want to delete this asset?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "Delete",
+          onPress: async () => {
+            try {
+              await deleteAssetById(assetObj.id);
+              console.log("Asset deleted");
+              router.replace("/(tabs)");
+            } catch (error) {
+              console.error("Failed to delete asset:", error);
+            }
+          },
+        },
+      ],
+      { cancelable: true }
+    );
   };
 
   if (!assetObj) return null;

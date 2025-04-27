@@ -1,6 +1,6 @@
 import globalStyles from "@/app/styles/global";
 import { useGlobalSearchParams, useRouter } from "expo-router";
-import { StyleSheet, View } from "react-native";
+import { Alert, StyleSheet, View } from "react-native";
 import {
   deleteEmployeeById,
   getEmployeeById,
@@ -48,13 +48,29 @@ export default function EmployeeDetails() {
   const deleteEmployeeClicked = async () => {
     if (!employeeObj) return;
 
-    try {
-      await deleteEmployeeById(employeeObj.id);
-      console.log("Employee deleted");
-      router.replace("/(tabs)/employees");
-    } catch (error) {
-      console.error("Failed to delete employee:", error);
-    }
+    Alert.alert(
+      "Confirm Deletion",
+      "Are you sure you want to delete this employee?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "Delete",
+          onPress: async () => {
+            try {
+              await deleteEmployeeById(employeeObj.id);
+              console.log("Employee deleted");
+              router.replace("/(tabs)/employees");
+            } catch (error) {
+              console.error("Failed to delete employee:", error);
+            }
+          },
+        },
+      ],
+      { cancelable: true }
+    );
   };
 
   if (!employeeObj) return null;
