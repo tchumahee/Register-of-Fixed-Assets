@@ -61,6 +61,7 @@ export default function AssetDetails() {
       <View style={globalStyles.contentContainer}>
         <View style={globalStyles.infoContainer}>
           <AssetView
+            editable={true}
             asset={assetObj}
             editAssetClicked={editAssetClicked}
             deleteAssetClicked={deleteAssetClicked}

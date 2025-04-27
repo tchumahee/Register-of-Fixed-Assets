@@ -1,17 +1,16 @@
-import { StyleSheet, TouchableHighlight, TouchableOpacity } from 'react-native';
+import { StyleSheet, TouchableHighlight, TouchableOpacity } from "react-native";
 
-import { Text, View } from '@/components/Themed';
-import { FlatList } from 'react-native';
-import colors from '@/app/styles/colors';
-import globalStyles from '@/app/styles/global';
-import { useCallback, useEffect, useState } from 'react';
-import { getAllEmployees, Employee } from '@/app/database/employeeService';
-import { useFocusEffect, useRouter } from 'expo-router';
-import { FontAwesome } from '@expo/vector-icons';
-
+import { Text, View } from "@/components/Themed";
+import { FlatList } from "react-native";
+import colors from "@/app/styles/colors";
+import globalStyles from "@/app/styles/global";
+import { useCallback, useEffect, useState } from "react";
+import { getAllEmployees, Employee } from "@/app/database/employeeService";
+import { useFocusEffect, useRouter } from "expo-router";
+import { FontAwesome } from "@expo/vector-icons";
 
 function FloatingButtonIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>['name'];
+  name: React.ComponentProps<typeof FontAwesome>["name"];
   color: string;
 }) {
   return <FontAwesome size={15} style={{ marginBottom: -3 }} {...props} />;
@@ -22,7 +21,7 @@ export default function EmployeesScreen() {
 
   function addNewEntryModal() {
     //setModalIsVisible(true);
-    router.push('/(screens)/employee/add-new-employee?mode=add');
+    router.push("/(screens)/employee/add-new-employee?mode=add");
   }
 
   const [employees, setEmployees] = useState<Employee[]>([]);
@@ -37,12 +36,15 @@ export default function EmployeesScreen() {
   }
 
   const handlePress = (employee: Employee) => {
-    router.push({ pathname: `/(screens)/employee/[employee]`, params: { employee: JSON.stringify(employee) } });
+    router.push({
+      pathname: `/(screens)/employee/[employee]`,
+      params: { employee: JSON.stringify(employee) },
+    });
   };
 
   useFocusEffect(
     useCallback(() => {
-      fetchEmployees(); // Refresh every time the tab is focused
+      fetchEmployees();
     }, [])
   );
 
@@ -51,23 +53,25 @@ export default function EmployeesScreen() {
       <FlatList
         data={employees}
         keyExtractor={(item) => item.id!.toString()}
-        renderItem={({item}) => 
+        renderItem={({ item }) => (
           <TouchableOpacity
-          onPress={() => handlePress(item)}
-          activeOpacity={0.8}
-          style={globalStyles.listItem}
+            onPress={() => handlePress(item)}
+            activeOpacity={0.8}
+            style={globalStyles.listItem}
           >
-            <Text style={globalStyles.textLight}>{item.name + " " + item.lastname}</Text></TouchableOpacity>}    
-      >
-      
-      </FlatList>
-
+            <Text style={globalStyles.textLight}>
+              {item.name + " " + item.lastname}
+            </Text>
+          </TouchableOpacity>
+        )}
+      ></FlatList>
 
       <TouchableOpacity
-      activeOpacity={0.8} 
-      onPress={addNewEntryModal}
-      style={globalStyles.floatingButtonRight}>
-        <FloatingButtonIcon name="plus" color={'black'} />
+        activeOpacity={0.8}
+        onPress={addNewEntryModal}
+        style={globalStyles.floatingButtonRight}
+      >
+        <FloatingButtonIcon name="plus" color={"black"} />
       </TouchableOpacity>
     </View>
   );

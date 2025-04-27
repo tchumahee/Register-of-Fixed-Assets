@@ -13,7 +13,6 @@ import CensusView from "@/app/components/census/census-view";
 export default function CensusListView() {
   const params = useLocalSearchParams();
   const censusList = params["census-list"];
-  console.log(censusList);
 
   let parsedCensusList: CensusList;
 

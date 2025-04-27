@@ -48,6 +48,13 @@ export default function CensusView({
     }
   };
 
+  const handlePress = (censusItemWithDetails: CensusItemWithDetails) => {
+    router.push({
+      pathname: `/(screens)/census/census-item/[item]`,
+      params: { censusItem: JSON.stringify(censusItemWithDetails) },
+    });
+  };
+
   return (
     <View>
       <View style={globalStyles.buttonViewHR}>
@@ -69,6 +76,7 @@ export default function CensusView({
         keyExtractor={(item) => `${item.asset_id}-${item.census_list_id}`}
         renderItem={({ item }) => (
           <TouchableOpacity
+            onPress={() => handlePress(item)}
             activeOpacity={0.8}
             style={styles.assetItemContainer}
           >
