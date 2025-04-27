@@ -11,12 +11,14 @@ import {
   CensusItem,
   CensusItemWithDetails,
   CensusList,
+  deleteCensusList,
 } from "../../database/censusService";
 import { FontAwesome } from "@expo/vector-icons";
 import colors from "../../styles/colors";
 import { getLocationById, Location } from "@/app/database/locationService";
 import { Employee, getEmployeeById } from "@/app/database/employeeService";
 import { useEffect, useState } from "react";
+import { useRouter } from "expo-router";
 
 function OptionIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>["name"];
@@ -34,8 +36,29 @@ export default function CensusView({
   censusList,
   censusItems,
 }: CensusViewProps) {
+  const router = useRouter();
+
+  const deleteCensusListPressed = async () => {
+    try {
+      await deleteCensusList(censusList.id);
+      console.log("Transfer list deleted");
+      router.replace("/(tabs)/census");
+    } catch (error) {
+      console.error("Failed to delete transfer list:", error);
+    }
+  };
+
   return (
     <View>
+      <View style={globalStyles.buttonViewHR}>
+        <TouchableOpacity
+          onPress={deleteCensusListPressed}
+          activeOpacity={0.8}
+          style={globalStyles.optionsButton}
+        >
+          <OptionIcon name="trash" color={colors.secondary} />
+        </TouchableOpacity>
+      </View>
       <View>
         <Text style={globalStyles.textLabel}>Date Created:</Text>
         <Text style={globalStyles.textLight}>{censusList.date}</Text>
