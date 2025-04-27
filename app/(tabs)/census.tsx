@@ -33,7 +33,7 @@ export default function CensusListsScreen() {
   const handlePress = (list: CensusList) => {
     router.push({
       pathname: "/(screens)/census/[census-list]",
-      params: { "census-item": JSON.stringify(list) },
+      params: { "census-list": JSON.stringify(list) },
     });
   };
 

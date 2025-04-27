@@ -11,20 +11,25 @@ import {
   BackHandler,
 } from "react-native";
 import { useFocusEffect, useLocalSearchParams, useRouter } from "expo-router";
-import { CensusItem } from "@/app/database/censusService";
+import {
+  addCensusItem,
+  addCensusList,
+  CensusItem,
+} from "@/app/database/censusService";
 import globalStyles from "@/app/styles/global";
 import { FontAwesome } from "@expo/vector-icons";
 import { Asset, getAllAssets } from "@/app/database/assetService";
 import colors from "@/app/styles/colors";
 import { getAllLocations, Location } from "@/app/database/locationService";
 import { Employee, getAllEmployees } from "@/app/database/employeeService";
+import { getFormattedCurrentDate } from "@/app/utils/dateUtil";
 
 export default function AddNewCensusList() {
   const { updatedCensusItems } = useLocalSearchParams<{
     updatedCensusItems?: string;
   }>();
 
-  const [date, setDate] = useState("");
+  //const [date, setDate] = useState("");
   const router = useRouter();
 
   const [censusItems, setCensusItems] = useState<CensusItem[]>([]);
@@ -55,7 +60,7 @@ export default function AddNewCensusList() {
   useFocusEffect(
     React.useCallback(() => {
       const onBackPress = () => {
-        router.replace("/(tabs)");
+        router.replace("/(tabs)/census");
         return true;
       };
 
@@ -88,13 +93,22 @@ export default function AddNewCensusList() {
     });
   };
 
-  const handleAddCensusList = () => {
-    console.log("Final Census List Date:", date);
-    console.log("Final Census Items:", censusItems);
-    Alert.alert(
-      "Submit List",
-      `Submitting list for date ${date} with ${censusItems.length} items. (Implementation pending)`
-    );
+  const handleAddCensusList = async () => {
+    const date = getFormattedCurrentDate();
+
+    try {
+      const censusListId = await addCensusList(date);
+      await Promise.all(
+        censusItems.map((item) => {
+          item.census_list_id = censusListId;
+          return addCensusItem(item);
+        })
+      );
+      router.push("/(tabs)/census");
+    } catch (error) {
+      Alert.alert("Error", "Failed to save the census list.");
+    }
+
     // Here you would likely call addCensusList(date, censusItems) or similar
     // and then navigate away, perhaps back to the main census screen.
     // Example:

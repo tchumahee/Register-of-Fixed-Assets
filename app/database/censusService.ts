@@ -12,8 +12,8 @@ export interface CensusItem {
   census_list_id: number;
   previous_location: number;
   new_location: number;
-  previous_person: number; // now number
-  new_person: number;      // now number
+  previous_person: number; 
+  new_person: number;    
 }
 
 export interface CensusItemWithDetails extends CensusItem {

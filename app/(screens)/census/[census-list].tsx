@@ -3,64 +3,41 @@ import { View, Text, FlatList, Image, StyleSheet } from "react-native";
 import { useEffect, useState } from "react";
 import {
   CensusItemWithDetails,
+  CensusList,
   getCensusItemsByList,
 } from "@/app/database/censusService";
 import globalStyles from "@/app/styles/global";
+import { useLocalSearchParams } from "expo-router";
+import CensusView from "@/app/components/census/census-view";
 
-export default function CensusListView({ listId }: { listId: number }) {
-  const [items, setItems] = useState<CensusItemWithDetails[]>([]);
+export default function CensusListView() {
+  const params = useLocalSearchParams();
+  const censusList = params["census-list"];
+  console.log(censusList);
+
+  let parsedCensusList: CensusList;
+
+  if (censusList) {
+    parsedCensusList = JSON.parse(censusList as string);
+  }
+
+  const [censusItems, setCensusItems] = useState<CensusItemWithDetails[]>([]);
 
   useEffect(() => {
     const load = async () => {
-      const data = await getCensusItemsByList(listId);
-      setItems(data);
+      const data = await getCensusItemsByList(parsedCensusList.id);
+      setCensusItems(data);
     };
     load();
   }, []);
 
   return (
-    <FlatList
-      data={items}
-      keyExtractor={(item) => `${item.asset_id}-${item.census_list_id}`}
-      renderItem={({ item }) => (
-        <View style={styles.item}>
-          {item.asset_image ? (
-            <Image source={{ uri: item.asset_image }} style={styles.image} />
-          ) : (
-            <View style={styles.placeholder} />
-          )}
-          <View>
-            <Text style={globalStyles.textLight}>Asset: {item.asset_name}</Text>
-            <Text style={globalStyles.textLight}>
-              From: {item.previous_location_name} ({item.previous_person})
-            </Text>
-            <Text style={globalStyles.textLight}>
-              To: {item.new_location_name} ({item.new_person})
-            </Text>
-          </View>
+    <View style={globalStyles.modalWindow}>
+      <View style={globalStyles.contentContainer}>
+        <View style={globalStyles.infoContainer}>
+          <CensusView censusList={parsedCensusList} censusItems={censusItems} />
         </View>
-      )}
-    />
+      </View>
+    </View>
   );
 }
-
-const styles = StyleSheet.create({
-  item: {
-    flexDirection: "row",
-    marginVertical: 8,
-    alignItems: "center",
-  },
-  image: {
-    width: 50,
-    height: 50,
-    borderRadius: 8,
-    marginRight: 10,
-  },
-  placeholder: {
-    width: 50,
-    height: 50,
-    borderRadius: 8,
-    marginRight: 10,
-    backgroundColor: "#ccc",
-  },
-});

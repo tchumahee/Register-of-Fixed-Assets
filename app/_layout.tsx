@@ -89,7 +89,7 @@ function RootLayoutNav() {
         <Stack.Screen
           name="(screens)/census/[census-list]"
           options={{
-            title: "Census details",
+            title: "Transfer list details",
           }}
         />
 
