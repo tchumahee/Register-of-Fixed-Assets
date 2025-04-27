@@ -20,21 +20,37 @@ export default function CensusItemView({
       ) : null}
 
       <View>
-        <Text style={globalStyles.textLight}>
-          {censusItemWithDetails.asset_id}
-        </Text>
-        <Text style={globalStyles.textLight}>
-          {censusItemWithDetails.asset_name}
+        <View style={globalStyles.infoRow}>
+          <Text style={globalStyles.textLabel}>Asset ID:</Text>
+          <Text style={globalStyles.textLightInd}>
+            {censusItemWithDetails.asset_id}
+          </Text>
+        </View>
+
+        <View style={globalStyles.infoRow}>
+          <Text style={globalStyles.textLabel}>Asset Name:</Text>
+          <Text style={globalStyles.textLightInd}>
+            {censusItemWithDetails.asset_name}
+          </Text>
+        </View>
+      </View>
+
+      <View style={globalStyles.separator}></View>
+
+      <View style={globalStyles.infoRow}>
+        <Text style={globalStyles.textLabel}>Location transfer:</Text>
+        <Text style={globalStyles.textLightInd}>
+          {censusItemWithDetails?.previous_location_name} →{" "}
+          {censusItemWithDetails?.new_location_name}
         </Text>
       </View>
-      <Text style={globalStyles.textLight}>
-        {censusItemWithDetails?.previous_location_name} →{" "}
-        {censusItemWithDetails?.new_location_name}
-      </Text>
-      <Text style={globalStyles.textLight}>
-        {censusItemWithDetails?.previous_person_name} →{" "}
-        {censusItemWithDetails?.new_person_name}
-      </Text>
+      <View style={globalStyles.infoRow}>
+        <Text style={globalStyles.textLabel}>Person transfer:</Text>
+        <Text style={globalStyles.textLightInd}>
+          {censusItemWithDetails?.previous_person_name} →{" "}
+          {censusItemWithDetails?.new_person_name}
+        </Text>
+      </View>
     </View>
   );
 }

@@ -54,8 +54,11 @@ export default function LocationView({
         </TouchableOpacity>
       </View>
       <View style={{ flex: 1 }}>
-        <Text style={globalStyles.textLight}>{location.id}</Text>
-        <Text style={globalStyles.textLight}>{location.name}</Text>
+        <View style={globalStyles.infoRow}>
+          <Text style={globalStyles.textLabel}>Location:{"  "}</Text>
+          <Text style={globalStyles.textLightInd}>{location.name}</Text>
+        </View>
+
         <View style={globalStyles.separator}></View>
         <FlatList
           style={{ display: "flex" }}

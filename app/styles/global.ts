@@ -55,7 +55,12 @@ const globalStyles = StyleSheet.create({
 
     textLight: {
         color: colors.textLight,
-        fontSize: 16
+        fontSize: 16,
+    },
+    textLightInd: {
+        color: colors.textLight,
+        fontSize: 16,
+        marginLeft:10
     },
     textLightS: {
         color: colors.textLight,
@@ -201,6 +206,11 @@ const globalStyles = StyleSheet.create({
         borderRadius: 1,
         margin: 10,
         backgroundColor: colors.primaryLighter
+    },
+
+    infoRow: {
+        flexDirection: "row", marginBottom: 5,
+        flexWrap: 'wrap',
     }
 })
 

@@ -70,19 +70,54 @@ export default function AssetView({
       ) : null}
 
       <View>
-        <Text style={globalStyles.textLight}>{asset.id}</Text>
-        <Text style={globalStyles.textLight}>{asset.name}</Text>
-        <Text style={globalStyles.textLight}>{asset.asset_type}</Text>
-        <Text style={globalStyles.textLight}>{asset.description}</Text>
-        <Text style={globalStyles.textLight}>{asset.barcode}</Text>
-        <Text style={globalStyles.textLight}>{asset.price}</Text>
-        <Text style={globalStyles.textLight}>{asset.creation_date}</Text>
-        <Text style={globalStyles.textLight}>
-          {location ? location.name : "Loading..."}
-        </Text>
-        <Text style={globalStyles.textLight}>
-          {employee ? employee.name + " " + employee.lastname : "Loading..."}
-        </Text>
+        <View style={globalStyles.infoRow}>
+          <Text style={globalStyles.textLabel}>Asset ID:</Text>
+          <Text style={globalStyles.textLightInd}>{asset.id}</Text>
+        </View>
+
+        <View style={globalStyles.infoRow}>
+          <Text style={globalStyles.textLabel}>Asset Name:</Text>
+          <Text style={globalStyles.textLightInd}>{asset.name}</Text>
+        </View>
+
+        <View style={globalStyles.infoRow}>
+          <Text style={globalStyles.textLabel}>Asset Type:</Text>
+          <Text style={globalStyles.textLightInd}>{asset.asset_type}</Text>
+        </View>
+
+        <View style={globalStyles.infoRow}>
+          <Text style={globalStyles.textLabel}>Description:</Text>
+          <Text style={globalStyles.textLightInd}>{asset.description}</Text>
+        </View>
+
+        <View style={globalStyles.infoRow}>
+          <Text style={globalStyles.textLabel}>Barcode:</Text>
+          <Text style={globalStyles.textLightInd}>{asset.barcode}</Text>
+        </View>
+
+        <View style={globalStyles.infoRow}>
+          <Text style={globalStyles.textLabel}>Price:</Text>
+          <Text style={globalStyles.textLightInd}>{asset.price}</Text>
+        </View>
+
+        <View style={globalStyles.infoRow}>
+          <Text style={globalStyles.textLabel}>Creation Date:</Text>
+          <Text style={globalStyles.textLightInd}>{asset.creation_date}</Text>
+        </View>
+
+        <View style={globalStyles.infoRow}>
+          <Text style={globalStyles.textLabel}>Location:</Text>
+          <Text style={globalStyles.textLightInd}>
+            {location ? location.name : "Loading..."}
+          </Text>
+        </View>
+
+        <View style={globalStyles.infoRow}>
+          <Text style={globalStyles.textLabel}>Employee:</Text>
+          <Text style={globalStyles.textLightInd}>
+            {employee ? employee.name + " " + employee.lastname : "Loading..."}
+          </Text>
+        </View>
       </View>
     </View>
   );

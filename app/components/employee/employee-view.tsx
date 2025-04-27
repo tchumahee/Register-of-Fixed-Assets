@@ -42,10 +42,25 @@ export default function EmployeeView({
         </TouchableOpacity>
       </View>
       <View>
-        <Text style={globalStyles.textLight}>{employee.id}</Text>
-        <Text style={globalStyles.textLight}>{employee.name}</Text>
-        <Text style={globalStyles.textLight}>{employee.lastname}</Text>
-        <Text style={globalStyles.textLight}>{employee.email}</Text>
+        <View style={globalStyles.infoRow}>
+          <Text style={globalStyles.textLabel}>Employee ID:{"  "}</Text>
+          <Text style={globalStyles.textLightInd}>{employee.id}</Text>
+        </View>
+
+        <View style={globalStyles.infoRow}>
+          <Text style={globalStyles.textLabel}>First Name:{"  "}</Text>
+          <Text style={globalStyles.textLightInd}>{employee.name}</Text>
+        </View>
+
+        <View style={globalStyles.infoRow}>
+          <Text style={globalStyles.textLabel}>Last Name:{"  "}</Text>
+          <Text style={globalStyles.textLightInd}>{employee.lastname}</Text>
+        </View>
+
+        <View style={globalStyles.infoRow}>
+          <Text style={globalStyles.textLabel}>Email:{"  "}</Text>
+          <Text style={globalStyles.textLightInd}>{employee.email}</Text>
+        </View>
       </View>
     </View>
   );
