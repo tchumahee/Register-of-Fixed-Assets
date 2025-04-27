@@ -75,7 +75,6 @@ export default function AddEmployeeScreen() {
         <View style={globalStyles.infoContainer}>
           <Text style={globalStyles.textLabel}>First Name:</Text>
           <TextInput
-            placeholder="First Name"
             value={name}
             onChangeText={setName}
             style={globalStyles.textInput}
@@ -83,7 +82,6 @@ export default function AddEmployeeScreen() {
 
           <Text style={globalStyles.textLabel}>Last Name:</Text>
           <TextInput
-            placeholder="Last Name"
             value={lastname}
             onChangeText={setLastname}
             style={globalStyles.textInput}
@@ -91,7 +89,6 @@ export default function AddEmployeeScreen() {
 
           <Text style={globalStyles.textLabel}>Email:</Text>
           <TextInput
-            placeholder="Email"
             value={email}
             onChangeText={setEmail}
             style={globalStyles.textInput}
