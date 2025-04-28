@@ -143,7 +143,7 @@ export default function IndexScreen() {
               {employees.map((emp) => (
                 <Picker.Item
                   key={emp.id}
-                  label={emp.name}
+                  label={`${emp.name} ${emp.lastname}`}
                   value={emp.id}
                   style={globalStyles.dropdownItem}
                 />
