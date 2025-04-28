@@ -4,7 +4,6 @@ import { useCallback, useState } from "react";
 import { useFocusEffect, useRouter } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
 import globalStyles from "@/app/styles/global";
-import colors from "@/app/styles/colors";
 
 import { getAllCensusLists, CensusList } from "../database/censusService";
 
@@ -26,7 +25,7 @@ export default function CensusListsScreen() {
 
   useFocusEffect(
     useCallback(() => {
-      fetchLists(); // Reload every time screen is focused
+      fetchLists();
     }, [])
   );
 

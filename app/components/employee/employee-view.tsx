@@ -1,8 +1,7 @@
 import { Text, TouchableOpacity, View } from "react-native";
 import globalStyles from "../../styles/global";
-import { deleteEmployeeById, Employee } from "../../database/employeeService";
+import { Employee } from "../../database/employeeService";
 import { FontAwesome } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
 import colors from "../../styles/colors";
 
 function OptionIcon(props: {

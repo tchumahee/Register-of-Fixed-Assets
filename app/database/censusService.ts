@@ -1,4 +1,3 @@
-// database/censusService.ts
 import { getDatabase } from './database';
 
 export interface CensusList {
@@ -24,8 +23,6 @@ export interface CensusItemWithDetails extends CensusItem {
   previous_person_name: string | null;
   new_person_name: string | null;
 }
-
-// CRUD for Census List
 
 export const addCensusList = async (date: string): Promise<number> => {
   const db = await getDatabase();
@@ -54,8 +51,6 @@ export const getCensusListById = async (id: number): Promise<CensusList | null> 
     [id]
   );
 };
-
-// CRUD for Census Items
 
 export const addCensusItem = async (item: CensusItem): Promise<void> => {
   const db = await getDatabase();

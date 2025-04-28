@@ -1,15 +1,9 @@
-import {
-  StyleSheet,
-  TouchableOpacity,
-  Image,
-  Modal,
-  Pressable,
-} from "react-native";
+import { StyleSheet, TouchableOpacity, Image, Modal } from "react-native";
 import { Text, View } from "@/components/Themed";
 import { FlatList } from "react-native";
 import colors from "@/app/styles/colors";
 import globalStyles from "@/app/styles/global";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { getAllAssets, Asset } from "@/app/database/assetService";
 import { getAllEmployees, Employee } from "@/app/database/employeeService";
 import { getAllLocations, Location } from "@/app/database/locationService";

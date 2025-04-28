@@ -8,9 +8,8 @@ import {
   View,
 } from "react-native";
 import globalStyles from "../../styles/global";
-import { deleteLocationById, Location } from "../../database/locationService";
+import { Location } from "../../database/locationService";
 import { FontAwesome } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
 import colors from "../../styles/colors";
 import { useEffect, useState } from "react";
 import { Asset, getAssetsByLocation } from "@/app/database/assetService";

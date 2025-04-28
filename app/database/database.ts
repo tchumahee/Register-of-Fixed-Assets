@@ -1,19 +1,15 @@
 import * as SQLite from 'expo-sqlite';
 
-// Open the database asynchronously
 const db = SQLite.openDatabaseAsync('app.db');
 
 export const getDatabase = async () => {
   return await db;
 };
 
-// Function to initialize the database
 export const initDatabase = async () => {
   try {
-    // Wait for the database to be opened
     const database = await db;
 
-    // Create the tables using execAsync
     await database.execAsync(`
       -- Table: location
       CREATE TABLE IF NOT EXISTS location (

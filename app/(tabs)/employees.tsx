@@ -1,8 +1,7 @@
-import { StyleSheet, TouchableHighlight, TouchableOpacity } from "react-native";
+import { TouchableOpacity } from "react-native";
 
 import { Text, View } from "@/components/Themed";
 import { FlatList } from "react-native";
-import colors from "@/app/styles/colors";
 import globalStyles from "@/app/styles/global";
 import { useCallback, useEffect, useState } from "react";
 import { getAllEmployees, Employee } from "@/app/database/employeeService";
@@ -20,7 +19,6 @@ export default function EmployeesScreen() {
   const router = useRouter();
 
   function addNewEntryModal() {
-    //setModalIsVisible(true);
     router.push("/(screens)/employee/add-new-employee?mode=add");
   }
 

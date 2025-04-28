@@ -1,6 +1,5 @@
 import { StyleSheet, ViewStyle } from "react-native";
 import colors from "./colors";
-import { CurrentRenderContext } from "@react-navigation/native";
 
 const baseButton = {
     borderRadius: 10,

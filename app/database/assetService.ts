@@ -106,6 +106,18 @@ export const deleteAssetById = async (id: number): Promise<void> => {
   console.log('✅ Asset deleted!');
 };
 
+export const getAssetsByLocation = async (locationId: number): Promise<Asset[]> => {
+    const db = await getDatabase();
+
+    const assets = await db.getAllAsync<Asset>(
+        `SELECT * FROM asset WHERE current_location = ?`,
+        [locationId]
+    );
+
+    console.log(`✅ Assets fetched for location ID ${locationId}`);
+    return assets;
+    };
+
   export async function getAssetByBarcode(barcode: string): Promise<Asset | null> {
     const db = await getDatabase();
     const result = await db.getFirstAsync('SELECT * FROM asset WHERE barcode = ?', [barcode]);

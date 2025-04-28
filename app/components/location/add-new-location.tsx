@@ -1,13 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
-import {
-  View,
-  Modal,
-  Text,
-  TouchableOpacity,
-  TextInput,
-  StyleSheet,
-  Alert,
-} from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Alert } from "react-native";
 import globalStyles from "../../styles/global";
 import {
   addLocation,
@@ -31,7 +23,6 @@ const INITIAL_REGION = {
   longitudeDelta: 5.0,
 };
 
-// represents the form for editing / adding new locations. Directly calls the locationService
 export default function AddNewLocation() {
   const router = useRouter();
 
