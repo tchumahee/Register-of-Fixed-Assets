@@ -150,7 +150,9 @@ const globalStyles = StyleSheet.create({
     },
 
     buttonViewH: {
-        flexDirection: 'row'
+        flexDirection: 'row',
+        backgroundColor: 'rgba(0,0,0,0)',
+        justifyContent: 'center'
     },
 
     buttonViewV: {

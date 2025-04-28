@@ -8,7 +8,6 @@ import { Alert, View } from "react-native";
 export default function LocationDetails() {
   const router = useRouter();
   const { location } = useGlobalSearchParams();
-  //const locationObj: Location = ;
   const [locationObj, setLocationObj] = useState(
     JSON.parse(location as string)
   );

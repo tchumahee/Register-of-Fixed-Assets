@@ -48,7 +48,7 @@ export default function RootLayout() {
   useEffect(() => {
     const initializeDb = async () => {
       console.log("database load");
-      await initDatabase(); // Initialize the database and tables
+      await initDatabase();
     };
     initializeDb();
   }, []);
@@ -133,9 +133,8 @@ function RootLayoutNav() {
         />
 
         <Stack.Screen
-          name="(screens)/census/census-item/[item]"
+          name="(screens)/census/census-item/[item]/index"
           options={{
-            headerShown: false,
             title: "Item Details",
           }}
         />

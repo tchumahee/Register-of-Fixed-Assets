@@ -81,7 +81,7 @@ export default function AddNewCensusList() {
         setCensusItems(parsedItems);
       } catch (error) {
         console.error("Failed to parse updatedCensusItems:", error);
-        Alert.alert("Error", "Failed to update census list items.");
+        Alert.alert("Error", "Failed to update transfer list items.");
       }
     }
   }, [updatedCensusItems]);
@@ -125,7 +125,7 @@ export default function AddNewCensusList() {
 
       router.push("/(tabs)/census");
     } catch (error) {
-      Alert.alert("Error", "Failed to save the census list.");
+      Alert.alert("Error", "Failed to save the transfer list.");
     }
   };
 

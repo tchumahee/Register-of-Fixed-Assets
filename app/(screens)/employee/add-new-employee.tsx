@@ -62,7 +62,7 @@ export default function AddEmployeeScreen() {
     } else {
       await addEmployee(name, lastname, email);
     }
-    router.back(); // go back to previous screen
+    router.back();
   };
 
   const handleCancel = () => {
