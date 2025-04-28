@@ -48,21 +48,32 @@ export default function EmployeesScreen() {
 
   return (
     <View style={globalStyles.viewContainer}>
-      <FlatList
-        data={employees}
-        keyExtractor={(item) => item.id!.toString()}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => handlePress(item)}
-            activeOpacity={0.8}
-            style={globalStyles.listItem}
-          >
-            <Text style={globalStyles.textLight}>
-              {item.name + " " + item.lastname}
-            </Text>
-          </TouchableOpacity>
-        )}
-      ></FlatList>
+      {employees.length === 0 ? (
+        <Text
+          style={[
+            globalStyles.textLight,
+            { textAlign: "center", marginTop: 20 },
+          ]}
+        >
+          No items found.
+        </Text>
+      ) : (
+        <FlatList
+          data={employees}
+          keyExtractor={(item) => item.id!.toString()}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() => handlePress(item)}
+              activeOpacity={0.8}
+              style={globalStyles.listItem}
+            >
+              <Text style={globalStyles.textLight}>
+                {item.name + " " + item.lastname}
+              </Text>
+            </TouchableOpacity>
+          )}
+        ></FlatList>
+      )}
 
       <TouchableOpacity
         activeOpacity={0.8}

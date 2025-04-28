@@ -42,19 +42,30 @@ export default function CensusListsScreen() {
 
   return (
     <View style={globalStyles.viewContainer}>
-      <FlatList
-        data={censusLists}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => handlePress(item)}
-            activeOpacity={0.8}
-            style={globalStyles.listItem}
-          >
-            <Text style={globalStyles.textLight}>{item.date}</Text>
-          </TouchableOpacity>
-        )}
-      />
+      {censusLists.length === 0 ? (
+        <Text
+          style={[
+            globalStyles.textLight,
+            { textAlign: "center", marginTop: 20 },
+          ]}
+        >
+          No items found.
+        </Text>
+      ) : (
+        <FlatList
+          data={censusLists}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() => handlePress(item)}
+              activeOpacity={0.8}
+              style={globalStyles.listItem}
+            >
+              <Text style={globalStyles.textLight}>{item.date}</Text>
+            </TouchableOpacity>
+          )}
+        />
+      )}
       <TouchableOpacity
         activeOpacity={0.8}
         onPress={addNew}

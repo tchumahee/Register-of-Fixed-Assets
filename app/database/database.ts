@@ -12,7 +12,6 @@ export const initDatabase = async () => {
 
     await database.execAsync(`
       -- Table: location
-      DROP TABLE IF EXISTS location;
       CREATE TABLE IF NOT EXISTS location (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
@@ -21,7 +20,6 @@ export const initDatabase = async () => {
       );
       
       -- Table: employee
-      DROP TABLE IF EXISTS employee;
       CREATE TABLE IF NOT EXISTS employee (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
@@ -30,7 +28,6 @@ export const initDatabase = async () => {
       );
       
       -- Table: asset
-      DROP TABLE IF EXISTS asset;
       CREATE TABLE IF NOT EXISTS asset (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT,
@@ -47,7 +44,6 @@ export const initDatabase = async () => {
       );
       
       -- Table: census_list
-      DROP TABLE IF EXISTS census_list;
       CREATE TABLE IF NOT EXISTS census_list (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         date TEXT
@@ -55,7 +51,6 @@ export const initDatabase = async () => {
       
 
       -- Table: census_item
-      DROP TABLE IF EXISTS census_item;
       CREATE TABLE IF NOT EXISTS census_item (
         id INTEGER,
         asset_id INTEGER,

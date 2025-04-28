@@ -95,31 +95,42 @@ export default function IndexScreen() {
 
   return (
     <View style={globalStyles.viewContainer}>
-      <FlatList
-        data={filteredAssets}
-        keyExtractor={(item) => item.id!.toString()}
-        renderItem={({ item }) => (
-          <TouchableOpacity
-            onPress={() => handlePress(item)}
-            activeOpacity={0.8}
-            style={styles.assetItemContainer}
-          >
-            {item.image ? (
-              <Image
-                source={{ uri: item.image }}
-                style={styles.assetImage}
-                resizeMode="cover"
-              />
-            ) : (
-              <View style={styles.assetImagePlaceholder} />
-            )}
-            <View style={styles.assetTextContainer}>
-              <Text style={globalStyles.textLight}>{item.name}</Text>
-              <Text style={globalStyles.textLight}>{item.asset_type}</Text>
-            </View>
-          </TouchableOpacity>
-        )}
-      />
+      {filteredAssets.length === 0 ? (
+        <Text
+          style={[
+            globalStyles.textLight,
+            { textAlign: "center", marginTop: 20 },
+          ]}
+        >
+          No items found.
+        </Text>
+      ) : (
+        <FlatList
+          data={filteredAssets}
+          keyExtractor={(item) => item.id!.toString()}
+          renderItem={({ item }) => (
+            <TouchableOpacity
+              onPress={() => handlePress(item)}
+              activeOpacity={0.8}
+              style={styles.assetItemContainer}
+            >
+              {item.image ? (
+                <Image
+                  source={{ uri: item.image }}
+                  style={styles.assetImage}
+                  resizeMode="cover"
+                />
+              ) : (
+                <View style={styles.assetImagePlaceholder} />
+              )}
+              <View style={styles.assetTextContainer}>
+                <Text style={globalStyles.textLight}>{item.name}</Text>
+                <Text style={globalStyles.textLight}>{item.asset_type}</Text>
+              </View>
+            </TouchableOpacity>
+          )}
+        />
+      )}
 
       <Modal
         animationType="slide"
@@ -177,7 +188,7 @@ export default function IndexScreen() {
                 style={globalStyles.buttonPrimary}
                 onPress={applyFilters}
               >
-                <Text style={globalStyles.textLight}>Apply Filters</Text>
+                <Text style={globalStyles.textDark}>Apply Filters</Text>
               </TouchableOpacity>
               <TouchableOpacity
                 activeOpacity={0.8}

@@ -131,6 +131,15 @@ export default function LocationsScreen() {
             />
           ))}
         </MapView>
+      ) : locations.length === 0 ? (
+        <Text
+          style={[
+            globalStyles.textLight,
+            { textAlign: "center", marginTop: 20 },
+          ]}
+        >
+          No items found.
+        </Text>
       ) : (
         <FlatList
           data={locations}
