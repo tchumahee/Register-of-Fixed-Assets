@@ -9,7 +9,7 @@ import { getAllEmployees, Employee } from "@/app/database/employeeService";
 import { getAllLocations, Location } from "@/app/database/locationService";
 import { useFocusEffect, useRouter } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
-import { Picker } from "@react-native-picker/picker"; // Install if not installed: expo install @react-native-picker/picker
+import { Picker } from "@react-native-picker/picker";
 
 function FloatingButtonIcon(props: {
   name: React.ComponentProps<typeof FontAwesome>["name"];
