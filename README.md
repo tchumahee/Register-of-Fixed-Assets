@@ -1,5 +1,5 @@
 # Registry of Fixed Assets 
-*Mobile React Native application made as a project for university. The project was meant as a proof of concept in terms of mobile UI development and other aspects such as security weren't considered during development.* 
+*Mobile React Native application made as a project for university.* 
 
 The application features ways to keep records of employees, business locations, owned assets at locations and asset transfer lists. 
 The starting screen of the application contains 4 tabs:
@@ -9,7 +9,7 @@ The starting screen of the application contains 4 tabs:
 - Transfer lists
 
 ## Assets Tab 
-The Assets tab contains a list of currently entered assets.  
+The Assets tab contains a list of currently entered assets. The results can be filtered by clicking on the floating filter button.
 
 ![alt text](https://github.com/tchumahee/Register-of-Fixed-Assets/blob/master/screenshots/assets.png?raw=true)  
 
@@ -36,10 +36,12 @@ This tab shows the current operating locations of the business, either in list v
 ![alt text](https://github.com/tchumahee/Register-of-Fixed-Assets/blob/master/screenshots/location-assets.png?raw=true)  
 
 ## Transfer Lists Tab 
-Transfer lists are identified by the date created in the list viewable list. They additionally include information on assets transfered, their previous and new owner, as well as the previous location from which it was transferred and the new one.
+Transfer lists are identified by the date created in the list viewable list. They include information on assets transfered, their previous and new owner, as well as the previous location from which they were transferred and the new one.
 A new list can be added by clicking on the floating add button. From here, specific items can be chosen and their new owning employee and location chosen, after which the item is added to the list. After editing is completed the new transfer list
  can be added. 
 
 ![alt text](https://github.com/tchumahee/Register-of-Fixed-Assets/blob/master/screenshots/transfer-lists.png?raw=true) 
 
 ![alt text](https://github.com/tchumahee/Register-of-Fixed-Assets/blob/master/screenshots/new-asset-transfer-list.png?raw=true) 
+
+*The project was meant as a proof of concept in terms of mobile UI development and other aspects such as security weren't considered during development.*
